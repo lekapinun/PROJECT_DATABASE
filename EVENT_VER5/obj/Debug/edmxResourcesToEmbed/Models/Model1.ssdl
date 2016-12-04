@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="EVENT">
+    <Key>
+      <PropertyRef Name="EVENT_ID" />
+    </Key>
+    <Property Name="EVENT_ID" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="EVENT_NAME" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="CATEGORY" Type="varchar2" MaxLength="20" Nullable="false" />
+    <Property Name="DETAIL" Type="varchar2" MaxLength="4000" />
+    <Property Name="PICTURE" Type="varchar2" MaxLength="4000" />
+    <Property Name="VIDEO" Type="varchar2" MaxLength="4000" />
+    <Property Name="TIME_START_E" Type="timestamp" Precision="6" />
+    <Property Name="TIME_END_E" Type="timestamp" Precision="6" />
+    <Property Name="CONDITION_MIN_AGE" Type="number" Precision="3" Scale="0" />
+    <Property Name="CONDITION_MAX_AGE" Type="number" Precision="3" Scale="0" />
+    <Property Name="CONDITION_SEX" Type="varchar2" MaxLength="6" />
+    <Property Name="SOLD_OUT_SEAT" Type="number" Precision="4" Scale="0" />
+    <Property Name="MAX_SEAT" Type="number" Precision="4" Scale="0" />
+    <Property Name="PRICE" Type="number" Precision="5" Scale="0" />
+    <Property Name="PROMOTE_E_ID" Type="number" Precision="5" Scale="0" />
+    <Property Name="LOCATION" Type="varchar2" MaxLength="4000" />
+  </EntityType>
+  <EntityType Name="FOLLOWING">
+    <Key>
+      <PropertyRef Name="MEMBER_ID" />
+      <PropertyRef Name="FOLLOWING_ID" />
+    </Key>
+    <Property Name="MEMBER_ID" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="FOLLOWING_ID" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="HISTORY" Type="date" />
+  </EntityType>
+  <EntityType Name="JOIN_EVENT">
+    <Key>
+      <PropertyRef Name="MEMBER_ID" />
+      <PropertyRef Name="EVENT_ID" />
+    </Key>
+    <Property Name="MEMBER_ID" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="EVENT_ID" Type="number" Precision="5" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LOCATION">
+    <Key>
+      <PropertyRef Name="ID_LOCATION" />
+    </Key>
+    <Property Name="ID_LOCATION" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="LOCATION_NAME" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="CATEGORY" Type="varchar2" MaxLength="15" />
+    <Property Name="DETAIL" Type="varchar2" MaxLength="4000" />
+    <Property Name="PICTURE" Type="varchar2" MaxLength="4000" />
+    <Property Name="ADDRESS" Type="varchar2" MaxLength="4000" />
+    <Property Name="FACILITY" Type="varchar2" MaxLength="4000" />
+    <Property Name="PRICE" Type="number" Precision="7" Scale="0" />
+    <Property Name="AREA" Type="number" Precision="9" Scale="0" />
+    <Property Name="PROMOTE_L_ID" Type="number" Precision="5" Scale="0" />
+  </EntityType>
+  <EntityType Name="MEMBER">
+    <Key>
+      <PropertyRef Name="MEMBER_ID" />
+    </Key>
+    <Property Name="MEMBER_ID" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="NATIONAL_ID" Type="number" Precision="13" Scale="0" Nullable="false" />
+    <Property Name="USERNAME" Type="varchar2" MaxLength="10" Nullable="false" />
+    <Property Name="PASSWORD" Type="varchar2" MaxLength="10" Nullable="false" />
+    <Property Name="FNAME" Type="varchar2" MaxLength="20" />
+    <Property Name="LNAME" Type="varchar2" MaxLength="20" />
+    <Property Name="SEX" Type="varchar2" MaxLength="6" />
+    <Property Name="BIRTH_DATE" Type="date" />
+    <Property Name="ADDRESS" Type="varchar2" MaxLength="100" />
+    <Property Name="E-MAIL" Type="varchar2" MaxLength="50" />
+    <Property Name="PHONE" Type="varchar2" MaxLength="10" />
+    <Property Name="CREDIT_CARD" Type="varchar2" MaxLength="20" />
+    <Property Name="URL_IMG" Type="varchar2" MaxLength="4000" />
+  </EntityType>
+  <EntityType Name="OWNER_EVENT">
+    <Key>
+      <PropertyRef Name="MEMBER_ID" />
+      <PropertyRef Name="EVENT_ID" />
+    </Key>
+    <Property Name="MEMBER_ID" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="EVENT_ID" Type="number" Precision="5" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OWNER_LOCATION">
+    <Key>
+      <PropertyRef Name="MEMBER_ID" />
+      <PropertyRef Name="LOCATION_ID" />
+    </Key>
+    <Property Name="MEMBER_ID" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="LOCATION_ID" Type="number" Precision="5" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PROMOTE_E">
+    <Key>
+      <PropertyRef Name="PROMOTE_ID" />
+    </Key>
+    <Property Name="PROMOTE_ID" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="BUDGETS" Type="number" Precision="6" Scale="0" />
+    <Property Name="END_DATE" Type="date" />
+    <Property Name="MEMBER_ID" Type="number" Precision="5" Scale="0" />
+    <Property Name="TARGET_GENDER" Type="varchar2" MaxLength="6" />
+    <Property Name="TARGET_MIN_AGE" Type="number" Precision="3" Scale="0" />
+    <Property Name="TARGET_MAX_AGE" Type="number" Precision="3" Scale="0" />
+    <Property Name="TARGET_INTEREST" Type="varchar2" MaxLength="4000" />
+  </EntityType>
+  <EntityType Name="PROMOTE_L">
+    <Key>
+      <PropertyRef Name="PROMOTE_ID" />
+    </Key>
+    <Property Name="PROMOTE_ID" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="BUDGETS" Type="number" Precision="6" Scale="0" />
+    <Property Name="END_DATE" Type="date" />
+    <Property Name="MEMBER_ID" Type="number" Precision="5" Scale="0" />
+  </EntityType>
+  <EntityType Name="TICKET">
+    <Key>
+      <PropertyRef Name="ID_TICKET" />
+    </Key>
+    <Property Name="ID_TICKET" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="AMOUNT" Type="number" Precision="6" Scale="0" />
+    <Property Name="MEMBER_ID" Type="number" Precision="5" Scale="0" />
+    <Property Name="EVENT_ID" Type="number" Precision="5" Scale="0" Nullable="false" />
+  </EntityType>
+  <Association Name="EVENT_FK">
+    <End Role="PROMOTE_E" Type="Self.PROMOTE_E" Multiplicity="0..1" />
+    <End Role="EVENT" Type="Self.EVENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROMOTE_E">
+        <PropertyRef Name="PROMOTE_ID" />
+      </Principal>
+      <Dependent Role="EVENT">
+        <PropertyRef Name="PROMOTE_E_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FOLLOWING_FK">
+    <End Role="MEMBER" Type="Self.MEMBER" Multiplicity="1" />
+    <End Role="FOLLOWING" Type="Self.FOLLOWING" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEMBER">
+        <PropertyRef Name="MEMBER_ID" />
+      </Principal>
+      <Dependent Role="FOLLOWING">
+        <PropertyRef Name="MEMBER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FOLLOWING_FK2">
+    <End Role="MEMBER" Type="Self.MEMBER" Multiplicity="1" />
+    <End Role="FOLLOWING" Type="Self.FOLLOWING" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEMBER">
+        <PropertyRef Name="MEMBER_ID" />
+      </Principal>
+      <Dependent Role="FOLLOWING">
+        <PropertyRef Name="FOLLOWING_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="JOIN_EVENT_FK">
+    <End Role="MEMBER" Type="Self.MEMBER" Multiplicity="1" />
+    <End Role="JOIN_EVENT" Type="Self.JOIN_EVENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEMBER">
+        <PropertyRef Name="MEMBER_ID" />
+      </Principal>
+      <Dependent Role="JOIN_EVENT">
+        <PropertyRef Name="MEMBER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="JOIN_EVENT_FK2">
+    <End Role="EVENT" Type="Self.EVENT" Multiplicity="1" />
+    <End Role="JOIN_EVENT" Type="Self.JOIN_EVENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EVENT">
+        <PropertyRef Name="EVENT_ID" />
+      </Principal>
+      <Dependent Role="JOIN_EVENT">
+        <PropertyRef Name="EVENT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LOCATION_FK">
+    <End Role="PROMOTE_L" Type="Self.PROMOTE_L" Multiplicity="0..1" />
+    <End Role="LOCATION" Type="Self.LOCATION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROMOTE_L">
+        <PropertyRef Name="PROMOTE_ID" />
+      </Principal>
+      <Dependent Role="LOCATION">
+        <PropertyRef Name="PROMOTE_L_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OWNER_EVENT_FK">
+    <End Role="MEMBER" Type="Self.MEMBER" Multiplicity="1" />
+    <End Role="OWNER_EVENT" Type="Self.OWNER_EVENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEMBER">
+        <PropertyRef Name="MEMBER_ID" />
+      </Principal>
+      <Dependent Role="OWNER_EVENT">
+        <PropertyRef Name="MEMBER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OWNER_EVENT_FK2">
+    <End Role="EVENT" Type="Self.EVENT" Multiplicity="1" />
+    <End Role="OWNER_EVENT" Type="Self.OWNER_EVENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EVENT">
+        <PropertyRef Name="EVENT_ID" />
+      </Principal>
+      <Dependent Role="OWNER_EVENT">
+        <PropertyRef Name="EVENT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OWNER_LOCATION_FK">
+    <End Role="MEMBER" Type="Self.MEMBER" Multiplicity="1" />
+    <End Role="OWNER_LOCATION" Type="Self.OWNER_LOCATION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEMBER">
+        <PropertyRef Name="MEMBER_ID" />
+      </Principal>
+      <Dependent Role="OWNER_LOCATION">
+        <PropertyRef Name="MEMBER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OWNER_LOCATION_FK2">
+    <End Role="LOCATION" Type="Self.LOCATION" Multiplicity="1" />
+    <End Role="OWNER_LOCATION" Type="Self.OWNER_LOCATION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOCATION">
+        <PropertyRef Name="ID_LOCATION" />
+      </Principal>
+      <Dependent Role="OWNER_LOCATION">
+        <PropertyRef Name="LOCATION_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PROMOTE_E_FK3">
+    <End Role="MEMBER" Type="Self.MEMBER" Multiplicity="0..1" />
+    <End Role="PROMOTE_E" Type="Self.PROMOTE_E" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEMBER">
+        <PropertyRef Name="MEMBER_ID" />
+      </Principal>
+      <Dependent Role="PROMOTE_E">
+        <PropertyRef Name="MEMBER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PROMOTE_L_FK">
+    <End Role="MEMBER" Type="Self.MEMBER" Multiplicity="0..1" />
+    <End Role="PROMOTE_L" Type="Self.PROMOTE_L" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEMBER">
+        <PropertyRef Name="MEMBER_ID" />
+      </Principal>
+      <Dependent Role="PROMOTE_L">
+        <PropertyRef Name="MEMBER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TICKET_FK">
+    <End Role="MEMBER" Type="Self.MEMBER" Multiplicity="0..1" />
+    <End Role="TICKET" Type="Self.TICKET" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEMBER">
+        <PropertyRef Name="MEMBER_ID" />
+      </Principal>
+      <Dependent Role="TICKET">
+        <PropertyRef Name="MEMBER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TICKET_FK2">
+    <End Role="EVENT" Type="Self.EVENT" Multiplicity="1" />
+    <End Role="TICKET" Type="Self.TICKET" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EVENT">
+        <PropertyRef Name="EVENT_ID" />
+      </Principal>
+      <Dependent Role="TICKET">
+        <PropertyRef Name="EVENT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="EVENT" EntityType="Self.EVENT" Schema="EVENT" store:Type="Tables" />
+    <EntitySet Name="FOLLOWING" EntityType="Self.FOLLOWING" Schema="EVENT" store:Type="Tables" />
+    <EntitySet Name="JOIN_EVENT" EntityType="Self.JOIN_EVENT" Schema="EVENT" store:Type="Tables" />
+    <EntitySet Name="LOCATION" EntityType="Self.LOCATION" Schema="EVENT" store:Type="Tables" />
+    <EntitySet Name="MEMBER" EntityType="Self.MEMBER" Schema="EVENT" store:Type="Tables" />
+    <EntitySet Name="OWNER_EVENT" EntityType="Self.OWNER_EVENT" Schema="EVENT" store:Type="Tables" />
+    <EntitySet Name="OWNER_LOCATION" EntityType="Self.OWNER_LOCATION" Schema="EVENT" store:Type="Tables" />
+    <EntitySet Name="PROMOTE_E" EntityType="Self.PROMOTE_E" Schema="EVENT" store:Type="Tables" />
+    <EntitySet Name="PROMOTE_L" EntityType="Self.PROMOTE_L" Schema="EVENT" store:Type="Tables" />
+    <EntitySet Name="TICKET" EntityType="Self.TICKET" Schema="EVENT" store:Type="Tables" />
+    <AssociationSet Name="EVENT_FK" Association="Self.EVENT_FK">
+      <End Role="PROMOTE_E" EntitySet="PROMOTE_E" />
+      <End Role="EVENT" EntitySet="EVENT" />
+    </AssociationSet>
+    <AssociationSet Name="FOLLOWING_FK" Association="Self.FOLLOWING_FK">
+      <End Role="MEMBER" EntitySet="MEMBER" />
+      <End Role="FOLLOWING" EntitySet="FOLLOWING" />
+    </AssociationSet>
+    <AssociationSet Name="FOLLOWING_FK2" Association="Self.FOLLOWING_FK2">
+      <End Role="MEMBER" EntitySet="MEMBER" />
+      <End Role="FOLLOWING" EntitySet="FOLLOWING" />
+    </AssociationSet>
+    <AssociationSet Name="JOIN_EVENT_FK" Association="Self.JOIN_EVENT_FK">
+      <End Role="MEMBER" EntitySet="MEMBER" />
+      <End Role="JOIN_EVENT" EntitySet="JOIN_EVENT" />
+    </AssociationSet>
+    <AssociationSet Name="JOIN_EVENT_FK2" Association="Self.JOIN_EVENT_FK2">
+      <End Role="EVENT" EntitySet="EVENT" />
+      <End Role="JOIN_EVENT" EntitySet="JOIN_EVENT" />
+    </AssociationSet>
+    <AssociationSet Name="LOCATION_FK" Association="Self.LOCATION_FK">
+      <End Role="PROMOTE_L" EntitySet="PROMOTE_L" />
+      <End Role="LOCATION" EntitySet="LOCATION" />
+    </AssociationSet>
+    <AssociationSet Name="OWNER_EVENT_FK" Association="Self.OWNER_EVENT_FK">
+      <End Role="MEMBER" EntitySet="MEMBER" />
+      <End Role="OWNER_EVENT" EntitySet="OWNER_EVENT" />
+    </AssociationSet>
+    <AssociationSet Name="OWNER_EVENT_FK2" Association="Self.OWNER_EVENT_FK2">
+      <End Role="EVENT" EntitySet="EVENT" />
+      <End Role="OWNER_EVENT" EntitySet="OWNER_EVENT" />
+    </AssociationSet>
+    <AssociationSet Name="OWNER_LOCATION_FK" Association="Self.OWNER_LOCATION_FK">
+      <End Role="MEMBER" EntitySet="MEMBER" />
+      <End Role="OWNER_LOCATION" EntitySet="OWNER_LOCATION" />
+    </AssociationSet>
+    <AssociationSet Name="OWNER_LOCATION_FK2" Association="Self.OWNER_LOCATION_FK2">
+      <End Role="LOCATION" EntitySet="LOCATION" />
+      <End Role="OWNER_LOCATION" EntitySet="OWNER_LOCATION" />
+    </AssociationSet>
+    <AssociationSet Name="PROMOTE_E_FK3" Association="Self.PROMOTE_E_FK3">
+      <End Role="MEMBER" EntitySet="MEMBER" />
+      <End Role="PROMOTE_E" EntitySet="PROMOTE_E" />
+    </AssociationSet>
+    <AssociationSet Name="PROMOTE_L_FK" Association="Self.PROMOTE_L_FK">
+      <End Role="MEMBER" EntitySet="MEMBER" />
+      <End Role="PROMOTE_L" EntitySet="PROMOTE_L" />
+    </AssociationSet>
+    <AssociationSet Name="TICKET_FK" Association="Self.TICKET_FK">
+      <End Role="MEMBER" EntitySet="MEMBER" />
+      <End Role="TICKET" EntitySet="TICKET" />
+    </AssociationSet>
+    <AssociationSet Name="TICKET_FK2" Association="Self.TICKET_FK2">
+      <End Role="EVENT" EntitySet="EVENT" />
+      <End Role="TICKET" EntitySet="TICKET" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

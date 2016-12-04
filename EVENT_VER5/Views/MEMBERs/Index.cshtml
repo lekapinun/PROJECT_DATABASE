@@ -1,0 +1,99 @@
+﻿@model IEnumerable<EVENT_VER5.Models.MEMBER>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NATIONAL_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.USERNAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PASSWORD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FNAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LNAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SEX)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BIRTH_DATE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ADDRESS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.E_MAIL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PHONE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CREDIT_CARD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.URL_IMG)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NATIONAL_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.USERNAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PASSWORD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FNAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LNAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SEX)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BIRTH_DATE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ADDRESS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.E_MAIL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PHONE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CREDIT_CARD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.URL_IMG)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MEMBER_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MEMBER_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MEMBER_ID })
+        </td>
+    </tr>
+}
+
+</table>

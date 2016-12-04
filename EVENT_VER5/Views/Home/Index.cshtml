@@ -1,0 +1,97 @@
+﻿@{
+    Layout = null;
+}
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+@Styles.Render("~/Content/site1.css")
+
+@if (Session["username"] == null)
+{
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <body class="background">
+        <div class="bigbox container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-md-1-offset-3 col-lg-offset-3" style="margin-top:200px;margin-bottom:300px">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12"><h1 class="headI">Event Organice</h1></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12">
+                            <p class="pI">
+                                Life is not about waiting for the storm to pass.<br>It is about learning to dance in the rain.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @Html.ActionLink("Get Start", "Create", "MEMBERs", "", new { @class = "btn btn-sm col-xs-12 col-sm-6 col-md-2 col-lg-4 col-sm-offset-3 col-md-offset-5 col-lg-offset-4 button-site" })
+                    </div>
+                    <div class="row">
+                        @Html.ActionLink("Login", "Login", "Home", new { @class = "btn btn-sm col-xs-12 col-sm-6 col-md-2 col-lg-4 col-sm-offset-3 col-md-offset-5 col-lg-offset-4 button-site" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section" style="background-color:#fff;padding-bottom:20px;">
+            <div class="container-fluid">
+                <div class="row text-center" style="margin-bottom:50px;">
+                    <div class="row">
+                        <h1 class="text-primary col-md-4 col-md-offset-4">Team</h1>
+                    </div>
+                    <div class="row">
+                        <p>We are a group of skilled individuals.</p>
+                    </div>
+                </div>
+
+                <div class="row col-md-offset-2 ">
+                    <div class="col-md-2">
+                        <img src="~/Content/img/Mhee.png"
+                             class="center-block img-circle img-responsive">
+                        <h3 class="text-center">Pittayathon Rinkaewngam</h3>
+                        <p class="text-center">Developer</p>
+                    </div>
+                    <div class="col-md-2">
+                        <img src="~/Content/img/Preaw.png"
+                             class="center-block img-circle img-responsive">
+                        <h3 class="text-center">Saranya Chinasoranun</h3>
+                        <p class="text-center">Developer</p>
+                    </div>
+                    <div class="col-md-2">
+                        <img src="~/Content/img/Jan.png"
+                             class="center-block img-circle img-responsive">
+                        <h3 class="text-center">E Jan</h3>
+                        <p class="text-center">Developer</p>
+                    </div>
+
+                    <div class="col-md-2">
+                        <img src="~/Content/img/Mind.png"
+                             class="center-block img-circle img-responsive">
+                        <h3 class="text-center">Suchada Yodyudee</h3>
+                        <p class="text-center">Developer</p>
+                    </div>
+                    <div class="col-md-2">
+                        <img src="~/Content/img/Lek.png"
+                             class="center-block img-circle img-responsive">
+                        <h3 class="text-center">Apinun Uppanun</h3>
+                        <p class="text-center">Developer</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+}
+else
+{
+    Layout = null;
+    @Html.Action("UsersHome", "Home")
+}
+
+
+
+
+
+
+
+

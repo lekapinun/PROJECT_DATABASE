@@ -1,0 +1,45 @@
+﻿@model IEnumerable<EVENT_VER5.Models.TICKET>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AMOUNT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EVENT.EVENT_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MEMBER.USERNAME)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AMOUNT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EVENT.EVENT_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MEMBER.USERNAME)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_TICKET }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_TICKET }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_TICKET })
+        </td>
+    </tr>
+}
+
+</table>

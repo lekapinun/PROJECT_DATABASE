@@ -1,0 +1,42 @@
+﻿@model EVENT_VER5.Models.PROMOTE_L
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PROMOTE_L</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BUDGETS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BUDGETS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.END_DATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.END_DATE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MEMBER.USERNAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MEMBER.USERNAME)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PROMOTE_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,42 @@
+﻿@model EVENT_VER5.Models.FOLLOWING
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FOLLOWING</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HISTORY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HISTORY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MEMBER.USERNAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MEMBER.USERNAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MEMBER1.USERNAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MEMBER1.USERNAME)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

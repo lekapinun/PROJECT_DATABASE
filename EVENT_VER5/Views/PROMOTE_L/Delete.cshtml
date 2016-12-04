@@ -1,0 +1,48 @@
+﻿@model EVENT_VER5.Models.PROMOTE_L
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>PROMOTE_L</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BUDGETS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BUDGETS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.END_DATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.END_DATE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MEMBER.USERNAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MEMBER.USERNAME)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

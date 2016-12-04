@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="EVENT">
+      <EntityTypeMapping TypeName="Model.EVENT">
+        <MappingFragment StoreEntitySet="EVENT">
+          <ScalarProperty Name="EVENT_ID" ColumnName="EVENT_ID" />
+          <ScalarProperty Name="EVENT_NAME" ColumnName="EVENT_NAME" />
+          <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
+          <ScalarProperty Name="DETAIL" ColumnName="DETAIL" />
+          <ScalarProperty Name="PICTURE" ColumnName="PICTURE" />
+          <ScalarProperty Name="VIDEO" ColumnName="VIDEO" />
+          <ScalarProperty Name="TIME_START_E" ColumnName="TIME_START_E" />
+          <ScalarProperty Name="TIME_END_E" ColumnName="TIME_END_E" />
+          <ScalarProperty Name="CONDITION_MIN_AGE" ColumnName="CONDITION_MIN_AGE" />
+          <ScalarProperty Name="CONDITION_MAX_AGE" ColumnName="CONDITION_MAX_AGE" />
+          <ScalarProperty Name="CONDITION_SEX" ColumnName="CONDITION_SEX" />
+          <ScalarProperty Name="SOLD_OUT_SEAT" ColumnName="SOLD_OUT_SEAT" />
+          <ScalarProperty Name="MAX_SEAT" ColumnName="MAX_SEAT" />
+          <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+          <ScalarProperty Name="PROMOTE_E_ID" ColumnName="PROMOTE_E_ID" />
+          <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FOLLOWING">
+      <EntityTypeMapping TypeName="Model.FOLLOWING">
+        <MappingFragment StoreEntitySet="FOLLOWING">
+          <ScalarProperty Name="MEMBER_ID" ColumnName="MEMBER_ID" />
+          <ScalarProperty Name="FOLLOWING_ID" ColumnName="FOLLOWING_ID" />
+          <ScalarProperty Name="HISTORY" ColumnName="HISTORY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LOCATION">
+      <EntityTypeMapping TypeName="Model.LOCATION">
+        <MappingFragment StoreEntitySet="LOCATION">
+          <ScalarProperty Name="ID_LOCATION" ColumnName="ID_LOCATION" />
+          <ScalarProperty Name="LOCATION_NAME" ColumnName="LOCATION_NAME" />
+          <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
+          <ScalarProperty Name="DETAIL" ColumnName="DETAIL" />
+          <ScalarProperty Name="PICTURE" ColumnName="PICTURE" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="FACILITY" ColumnName="FACILITY" />
+          <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+          <ScalarProperty Name="AREA" ColumnName="AREA" />
+          <ScalarProperty Name="PROMOTE_L_ID" ColumnName="PROMOTE_L_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MEMBER">
+      <EntityTypeMapping TypeName="Model.MEMBER">
+        <MappingFragment StoreEntitySet="MEMBER">
+          <ScalarProperty Name="MEMBER_ID" ColumnName="MEMBER_ID" />
+          <ScalarProperty Name="NATIONAL_ID" ColumnName="NATIONAL_ID" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="FNAME" ColumnName="FNAME" />
+          <ScalarProperty Name="LNAME" ColumnName="LNAME" />
+          <ScalarProperty Name="SEX" ColumnName="SEX" />
+          <ScalarProperty Name="BIRTH_DATE" ColumnName="BIRTH_DATE" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="E_MAIL" ColumnName="E-MAIL" />
+          <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+          <ScalarProperty Name="CREDIT_CARD" ColumnName="CREDIT_CARD" />
+          <ScalarProperty Name="URL_IMG" ColumnName="URL_IMG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PROMOTE_E">
+      <EntityTypeMapping TypeName="Model.PROMOTE_E">
+        <MappingFragment StoreEntitySet="PROMOTE_E">
+          <ScalarProperty Name="PROMOTE_ID" ColumnName="PROMOTE_ID" />
+          <ScalarProperty Name="BUDGETS" ColumnName="BUDGETS" />
+          <ScalarProperty Name="END_DATE" ColumnName="END_DATE" />
+          <ScalarProperty Name="MEMBER_ID" ColumnName="MEMBER_ID" />
+          <ScalarProperty Name="TARGET_GENDER" ColumnName="TARGET_GENDER" />
+          <ScalarProperty Name="TARGET_MIN_AGE" ColumnName="TARGET_MIN_AGE" />
+          <ScalarProperty Name="TARGET_MAX_AGE" ColumnName="TARGET_MAX_AGE" />
+          <ScalarProperty Name="TARGET_INTEREST" ColumnName="TARGET_INTEREST" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PROMOTE_L">
+      <EntityTypeMapping TypeName="Model.PROMOTE_L">
+        <MappingFragment StoreEntitySet="PROMOTE_L">
+          <ScalarProperty Name="PROMOTE_ID" ColumnName="PROMOTE_ID" />
+          <ScalarProperty Name="BUDGETS" ColumnName="BUDGETS" />
+          <ScalarProperty Name="END_DATE" ColumnName="END_DATE" />
+          <ScalarProperty Name="MEMBER_ID" ColumnName="MEMBER_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TICKET">
+      <EntityTypeMapping TypeName="Model.TICKET">
+        <MappingFragment StoreEntitySet="TICKET">
+          <ScalarProperty Name="ID_TICKET" ColumnName="ID_TICKET" />
+          <ScalarProperty Name="AMOUNT" ColumnName="AMOUNT" />
+          <ScalarProperty Name="MEMBER_ID" ColumnName="MEMBER_ID" />
+          <ScalarProperty Name="EVENT_ID" ColumnName="EVENT_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="JOIN_EVENT" TypeName="Model.JOIN_EVENT" StoreEntitySet="JOIN_EVENT">
+      <EndProperty Name="MEMBER">
+        <ScalarProperty Name="MEMBER_ID" ColumnName="MEMBER_ID" />
+      </EndProperty>
+      <EndProperty Name="EVENT">
+        <ScalarProperty Name="EVENT_ID" ColumnName="EVENT_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="OWNER_EVENT" TypeName="Model.OWNER_EVENT" StoreEntitySet="OWNER_EVENT">
+      <EndProperty Name="MEMBER">
+        <ScalarProperty Name="MEMBER_ID" ColumnName="MEMBER_ID" />
+      </EndProperty>
+      <EndProperty Name="EVENT">
+        <ScalarProperty Name="EVENT_ID" ColumnName="EVENT_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="OWNER_LOCATION" TypeName="Model.OWNER_LOCATION" StoreEntitySet="OWNER_LOCATION">
+      <EndProperty Name="MEMBER">
+        <ScalarProperty Name="MEMBER_ID" ColumnName="MEMBER_ID" />
+      </EndProperty>
+      <EndProperty Name="LOCATION">
+        <ScalarProperty Name="ID_LOCATION" ColumnName="LOCATION_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<EVENT_VER5.Models.PROMOTE_L>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BUDGETS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.END_DATE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MEMBER.USERNAME)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BUDGETS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.END_DATE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MEMBER.USERNAME)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PROMOTE_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PROMOTE_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PROMOTE_ID })
+        </td>
+    </tr>
+}
+
+</table>

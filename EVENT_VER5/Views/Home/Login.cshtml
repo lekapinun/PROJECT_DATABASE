@@ -1,0 +1,86 @@
+﻿@model EVENT_VER5.Models.login
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+@Styles.Render("~/Content/Site1.css")
+
+@if (Session["username"] == null)
+{
+    <body style="background-image:url('../Content/img/dance2.jpg');background-repeat: no-repeat;background-size: cover;">
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+        {
+            <div class="container-fluid">
+                <div class="col-xs-10 col-sm-6 col-md-4 col-lg-4 col-xs-offset-1  col-sm-offset-3 col-md-offset-4 col-lg-offset-4 text-center form-login">
+                    <div class="row text-center">
+                        <h3>Log in</h3>
+                    </div>
+                    <form>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-left">
+                                    <label for="exampleInputUsername1">Username</label>
+                                </div>
+                                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                    @Html.TextBoxFor(a => a.username, new { @class = "form-control", @type = "text", @placeholder = "Username" })
+                                    @Html.ValidationMessageFor(a => a.username)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-left">
+                                    <label for="exampleInputPassword1">Password</label>
+                                </div>
+                                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                    @Html.PasswordFor(a => a.password, new { @class = "form-control", @type = "password", @placeholder = "Password" })
+                                    @Html.ValidationMessageFor(a => a.password)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-btn">
+                            <input type="submit" id="submitbtn" class="btn btn-sm button-site col-md-2 col-lg-2 col-md-offset-4 col-lg-offset-4" value="Log in">
+                            @Html.ActionLink("Sign Up", "Create", "MEMBERs", "", new { @class = "btn btn-sm button-site col-md-2 col-lg-2 button-signup" })
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
+    </body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+}
+else
+{
+    Layout = null;
+    @Html.Action("UsersHome", "Home")
+}
+
+
+@*<div class="container-fluid">
+        <fieldset style="width:300px;">
+            <legend>Login</legend>
+            <table>
+                <tr>
+                    <td>@Html.Label("Enter User Name")</td>
+                </tr>
+                <tr>
+                    <td>@Html.TextBoxFor(a => a.username)</td>
+                    <td>@Html.ValidationMessageFor(a=>a.username)</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Enter Password")</td>
+                </tr>
+                <tr>
+                    <td>@Html.PasswordFor(a => a.password)</td>
+                    <td>@Html.ValidationMessageFor(a => a.password)</td>
+                </tr>
+                <tr>
+                    <td><input type="submit" id="submitbtn" value="Login" /></td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>*@
+

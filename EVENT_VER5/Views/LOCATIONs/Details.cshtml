@@ -1,0 +1,90 @@
+﻿@model EVENT_VER5.Models.LOCATION
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LOCATION</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LOCATION_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LOCATION_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CATEGORY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CATEGORY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DETAIL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DETAIL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PICTURE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PICTURE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ADDRESS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ADDRESS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FACILITY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FACILITY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRICE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRICE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AREA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AREA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PROMOTE_L.PROMOTE_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PROMOTE_L.PROMOTE_ID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_LOCATION }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

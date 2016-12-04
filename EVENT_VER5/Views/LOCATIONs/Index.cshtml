@@ -1,0 +1,81 @@
+﻿@model IEnumerable<EVENT_VER5.Models.LOCATION>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LOCATION_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CATEGORY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DETAIL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PICTURE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ADDRESS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FACILITY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRICE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AREA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PROMOTE_L.PROMOTE_ID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LOCATION_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CATEGORY)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DETAIL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PICTURE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ADDRESS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FACILITY)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRICE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AREA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PROMOTE_L.PROMOTE_ID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_LOCATION }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_LOCATION }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_LOCATION })
+        </td>
+    </tr>
+}
+
+</table>

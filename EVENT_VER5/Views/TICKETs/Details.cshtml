@@ -1,0 +1,42 @@
+﻿@model EVENT_VER5.Models.TICKET
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TICKET</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AMOUNT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AMOUNT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EVENT.EVENT_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EVENT.EVENT_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MEMBER.USERNAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MEMBER.USERNAME)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_TICKET }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
