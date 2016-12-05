@@ -51,6 +51,21 @@ namespace EVENT_VER5.Controllers
         {
             if (ModelState.IsValid)
             {
+                mEMBER.MEMBER_ID = (short)(db.MEMBER.Count() + 1);
+
+                string[] date = mEMBER.B_DATE.Split('-');
+                mEMBER.B_DATE = date[1] + '/' + date[0] + '/' + date[2];
+                mEMBER.BIRTH_DATE = Convert.ToDateTime(mEMBER.B_DATE);
+
+                db.MEMBER.Add(mEMBER);
+
+                if (mEMBER.URL_IMG == null)
+                {
+                    mEMBER.URL_IMG = "http://downloadicons.net/sites/default/files/user-icon-2722.png";
+                }
+
+                Session["img"] = mEMBER.URL_IMG;
+
                 db.MEMBER.Add(mEMBER);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

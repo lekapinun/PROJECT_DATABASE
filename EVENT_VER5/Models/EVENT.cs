@@ -11,7 +11,8 @@ namespace EVENT_VER5.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class EVENT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,20 +24,27 @@ namespace EVENT_VER5.Models
         }
     
         public short EVENT_ID { get; set; }
+        [Required(ErrorMessage = "please enter event name")]
         public string EVENT_NAME { get; set; }
+        [Required(ErrorMessage = "please enter event category")]
         public string CATEGORY { get; set; }
         public string DETAIL { get; set; }
         public string PICTURE { get; set; }
         public string VIDEO { get; set; }
+        //[Required(ErrorMessage = "please enter start event time")]
         public Nullable<System.DateTime> TIME_START_E { get; set; }
+        //[Required(ErrorMessage = "please enter end event time")]
         public Nullable<System.DateTime> TIME_END_E { get; set; }
         public Nullable<byte> CONDITION_MIN_AGE { get; set; }
         public Nullable<byte> CONDITION_MAX_AGE { get; set; }
         public string CONDITION_SEX { get; set; }
         public Nullable<short> SOLD_OUT_SEAT { get; set; }
+        [Required(ErrorMessage = "please enter max seat")]
         public Nullable<short> MAX_SEAT { get; set; }
+        [Required(ErrorMessage = "please enter ticket price")]
         public Nullable<short> PRICE { get; set; }
         public Nullable<short> PROMOTE_E_ID { get; set; }
+        [Required(ErrorMessage = "please enter location")]
         public string LOCATION { get; set; }
 
         public string Owner_member { get; set; }

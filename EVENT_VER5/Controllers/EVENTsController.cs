@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using EVENT_VER5.Models;
 
-namespace EVENT_VER5.Models
+namespace EVENT_VER5.Controllers
 {
     public class EVENTsController : Controller
     {
@@ -18,8 +18,8 @@ namespace EVENT_VER5.Models
         // GET: EVENTs
         public async Task<ActionResult> Index()
         {
-            var eVENTs = db.EVENT.Include(e => e.PROMOTE_E);
-            return View(await eVENTs.ToListAsync());
+            var eVENT = db.EVENT.Include(e => e.PROMOTE_E);
+            return View(await eVENT.ToListAsync());
         }
 
         // GET: EVENTs/Details/5
@@ -41,7 +41,6 @@ namespace EVENT_VER5.Models
         public ActionResult Create()
         {
             ViewBag.PROMOTE_E_ID = new SelectList(db.PROMOTE_E, "PROMOTE_ID", "TARGET_GENDER");
-            //ViewBag.LOCATION_NAME = new SelectList(db.LOCATIONs, "LOCATION_NAME", "LOCATION_NAME");
             return View();
         }
 
@@ -50,7 +49,7 @@ namespace EVENT_VER5.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "EVENT_ID,EVENT_NAME,CATEGORY,DETAIL,PICTURE,VIDEO,TIME_START_E,TIME_END_E,CONDITION_MIN_AGE,CONDITION_MAX_AGE,CONDITION_SEX,SOLD_OUT_SEAT,MAX_SEAT,PRICE,PROMOTE_E_ID,Event_location,S_DATE,E_DATE,S_TIME,E_TIME")] EVENT eVENT)
+        public async Task<ActionResult> Create([Bind(Include = "EVENT_ID,EVENT_NAME,CATEGORY,DETAIL,PICTURE,VIDEO,TIME_START_E,TIME_END_E,CONDITION_MIN_AGE,CONDITION_MAX_AGE,CONDITION_SEX,SOLD_OUT_SEAT,MAX_SEAT,PRICE,PROMOTE_E_ID,LOCATION,S_DATE,E_DATE,S_TIME,E_TIME")] EVENT eVENT)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +94,7 @@ namespace EVENT_VER5.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "EVENT_ID,EVENT_NAME,CATEGORY,DETAIL,PICTURE,VIDEO,TIME_START_E,TIME_END_E,CONDITION_MIN_AGE,CONDITION_MAX_AGE,CONDITION_SEX,SOLD_OUT_SEAT,MAX_SEAT,PRICE,PROMOTE_E_ID")] EVENT eVENT)
+        public async Task<ActionResult> Edit([Bind(Include = "EVENT_ID,EVENT_NAME,CATEGORY,DETAIL,PICTURE,VIDEO,TIME_START_E,TIME_END_E,CONDITION_MIN_AGE,CONDITION_MAX_AGE,CONDITION_SEX,SOLD_OUT_SEAT,MAX_SEAT,PRICE,PROMOTE_E_ID,LOCATION")] EVENT eVENT)
         {
             if (ModelState.IsValid)
             {
@@ -140,22 +139,6 @@ namespace EVENT_VER5.Models
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        public List<SelectListItem> Show_Location()
-        {
-            List<SelectListItem> list = new List<SelectListItem>();
-            foreach (var item in db.LOCATION)
-            {
-                list.Add(new SelectListItem { Text = item.LOCATION_NAME, Value = item.LOCATION_NAME });
-            }
-            return list;
-        }
-
-        public async Task<ActionResult> EVENT()
-        {
-            var eVENTs = db.EVENT;
-            return View(await eVENTs.ToListAsync());
         }
     }
 }
