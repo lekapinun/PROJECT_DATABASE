@@ -27,12 +27,21 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
 
             <form class="navbar-form  navbar-form-mind navbar-left">
-                <div class="form-group  form-group-sm form-group-mind ">
+                @*<div class="form-group  form-group-sm form-group-mind ">
                     <input type="search" class="form-control form-control-mind" placeholder="Search for ...">
                 </div>
                 <a class="btn btn-default btn-default-mind">
                     <span class="glyphicon glyphicon-search">  </span>
-                </a>
+                </a>*@
+                @using (Html.BeginForm())
+                {
+                    <div class="form-group  form-group-sm form-group-mind ">
+                        @Html.TextBox("searchString", null , new { @type = "search", @class = "form-control form-control-mind" ,@placeholder = "Search for ..." })
+                    </div>
+                    <a class="btn btn-default btn-default-mind">
+                        <span class="glyphicon glyphicon-search">  </span>
+                    </a>
+                }
             </form>
             <ul class="nav navbar-nav navbar-right">
                 @*<li><a href=@Html.Action("UsersHome","Home")><b>Home</b></a></li>*@
