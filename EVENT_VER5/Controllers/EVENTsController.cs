@@ -16,9 +16,13 @@ namespace EVENT_VER5.Controllers
         private Entities db = new Entities();
 
         // GET: EVENTs
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string category)
         {
             var eVENT = db.EVENT.Include(e => e.PROMOTE_E);
+            if (!string.IsNullOrEmpty(category) && !category.Equals("All"))
+            {
+                eVENT = eVENT.Where(a => a.CATEGORY.Equals(category));
+            }
             return View(await eVENT.ToListAsync());
         }
 

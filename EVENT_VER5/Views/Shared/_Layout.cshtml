@@ -37,7 +37,7 @@
             <ul class="nav navbar-nav navbar-right">
                 @*<li><a href=@Html.Action("UsersHome","Home")><b>Home</b></a></li>*@
                 <li>@Html.ActionLink("Home", "UsersHome", "Home", "", new { style = "font-weight:bold;" })</li>
-                <li>@Html.ActionLink("Event", "Index", "EVENTs", "", new { style = "font-weight:bold;" })</li>
+                <li>@Html.ActionLink("Event", "Index", "EVENTs", new { category = "All"}, new { style = "font-weight:bold;" })</li>
                 <li><a href="#"><b>Location</b></a></li>
                 @if (Session["img"] != null)
                 {

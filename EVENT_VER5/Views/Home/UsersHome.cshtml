@@ -1,13 +1,16 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "UsersHome";
-    Layout = null;
 }
+
 @if (Session["username"] != null)
 {
     <text>welcome @Session["username"].ToString() @Html.ActionLink("Logout", "Logout", "Home")</text><br />
-    @Html.ActionLink("Create", "Create", "EVENTs")<br />
-    @Html.ActionLink("Create", "Create", "LOCATIONs")<br />
+    @Html.ActionLink("Create Event", "Create", "EVENTs")<br />
+    @Html.ActionLink("Create ", "Create", "LOCATIONs")<br />
+}
+else
+{
+    @Html.Action("Index","Home")
 }
 
 
