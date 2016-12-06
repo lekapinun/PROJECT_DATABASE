@@ -1,10 +1,131 @@
-﻿@model EVENT_VER5.Models.MEMBER
+﻿@model IEnumerable<EVENT_VER5.Models.EVENT>
 
 @{
     ViewBag.Title = "Details";
+
+}
+@if (Session["username"] != null)
+{
+
+    <body>
+        @*@foreach (var item in Model)
+        {
+            @item.EVENT_NAME
+        }*@
+        <div class="section">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <img class="img-responsive  img-thumbnail" src=@ViewBag.mem.URL_IMG>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <h2 style="color: #A82221;">@ViewBag.mem.USERNAME</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+                                <a class="btn btn1 col-xs-12 col-sm-12 col-md-12 col-lg-12 button-site1 ">
+                                    <b>Edit Profile</b>
+                                    <span style="padding: 2px;" class="text-center glyphicon glyphicon-pencil"></span>
+
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="row text-center">
+                            <h4 style="color: #A82221;">About Me</h4>
+                        </div>
+                        <div style="border: 1px solid  #EDA23E ; padding-bottom: 0px; padding-top: 10px; ">
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <ul style="color: #A82221;">
+                                        <li>Name : @ViewBag.mem.FNAME</li>
+                                        <li>Surname : @ViewBag.mem.LNAME</li>
+                                        <li>Birthday : @String.Format("{0:d}", @ViewBag.mem.BIRTH_DATE)</li>
+                                        <li>Gendar : @ViewBag.mem.SEX</li>
+                                        <li>Phone : @ViewBag.mem.PHONE</li>
+                                        <li>E-mail : @ViewBag.mem.E_MAIL</li>
+                                        <li>Address : @ViewBag.mem.ADDRESS</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
+                        <div class="row">
+                            <section class="comment-list">
+                                <!-- First Comment -->
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                                        <div class="panel panel-default arrow left">
+                                            <div class="panel-body">
+                                                <div class="comment-post">
+                                                    <a href="#">
+                                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="padding-top: 10px; padding-bottom: 5px;">
+                                                            <img class="img-responsive  img-thumbnail" src="imgtest/Mind.png">
+                                                        </div>
+                                                    </a>
+                                                    <div class="col-xs-12 col-sm-12 col-md-8  col-lg-8">
+                                                        <h3 style="color:#A82221;">My Event</h3>
+                                                        <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-3 col-md-offset-9">
+                                                        <a href="#" class="btn btn1 button-site1"><b>Promote</b></a>
+                                                    </div>
+                                                </div>
+                                                <div class="comment-post">
+                                                    <a href="#">
+                                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="padding-top: 10px; padding-bottom: 5px;">
+                                                            <img class="img-responsive  img-thumbnail" src="imgtest/Mind.png">
+                                                        </div>
+                                                    </a>
+                                                    <div class="col-xs-12 col-sm-12 col-md-8  col-lg-8">
+
+                                                        <h3 style="color:#A82221;">Join Event</h3>
+                                                        <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <a href="#" class="col-md-12" style="color: #A82221;">
+                            <img src="imgtest/Mind.png" class="img-responsive">
+                            <h2>A Title</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisici elit,sed eiusmod tempor incidunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud
+                            </p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+}
+else
+{
+    @Html.Action("Index", "Home")
 }
 
-<h2>Details</h2>
+
+
+
+@*<h2>Details</h2>
 
 <div>
     <h4>MEMBER</h4>
@@ -111,4 +232,4 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.MEMBER_ID }) |
     @Html.ActionLink("Back to List", "Index")
-</p>
+</p>*@
