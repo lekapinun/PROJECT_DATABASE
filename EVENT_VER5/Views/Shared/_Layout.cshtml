@@ -50,7 +50,7 @@
                 <li><a href="#"><b>Location</b></a></li>
                 @if (Session["img"] != null)
                 {
-                    <li><a href="#"> <img src=@Session["img"] class="img-circle mini"> <b>@Session["username"]</b></a></li>
+                    <li><a href="@Url.Action("UsersHome","Home")"> <img src=@Session["img"] class="img-circle mini"> <b>@Session["username"]</b></a></li>
                 }
                 else
                 {

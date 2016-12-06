@@ -11,7 +11,8 @@ namespace EVENT_VER5.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class MEMBER
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,20 +29,33 @@ namespace EVENT_VER5.Models
         }
     
         public short MEMBER_ID { get; set; }
+        [Required(ErrorMessage = "please enter nation id")]
         public long NATIONAL_ID { get; set; }
+        [Required(ErrorMessage = "please enter user name")]
         public string USERNAME { get; set; }
+        [Required(ErrorMessage = "please enter password")]
         public string PASSWORD { get; set; }
+        [Required(ErrorMessage = "please enter name")]
         public string FNAME { get; set; }
+        [Required(ErrorMessage = "please enter surname")]
         public string LNAME { get; set; }
+        [Required(ErrorMessage = "please enter sex")]
         public string SEX { get; set; }
+        [Required(ErrorMessage = "please enter birth day")]
         public Nullable<System.DateTime> BIRTH_DATE { get; set; }
+        [Required(ErrorMessage = "please enter address")]
         public string ADDRESS { get; set; }
+        [Required(ErrorMessage = "please enter e-mail")]
         public string E_MAIL { get; set; }
+        [Required(ErrorMessage = "please enter phone")]
         public string PHONE { get; set; }
+        [Required(ErrorMessage = "please enter credit card")]
         public string CREDIT_CARD { get; set; }
         public string URL_IMG { get; set; }
 
         public string B_DATE { get; set; }
+        [Required(ErrorMessage = "please enter re-password")]
+        public string RE_ENTER { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FOLLOWING> FOLLOWING { get; set; }

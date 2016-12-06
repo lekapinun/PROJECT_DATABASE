@@ -47,8 +47,26 @@ namespace EVENT_VER5.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "MEMBER_ID,NATIONAL_ID,USERNAME,PASSWORD,FNAME,LNAME,SEX,BIRTH_DATE,ADDRESS,E_MAIL,PHONE,CREDIT_CARD,URL_IMG")] MEMBER mEMBER)
+        public async Task<ActionResult> Create([Bind(Include = "MEMBER_ID,NATIONAL_ID,USERNAME,PASSWORD,FNAME,LNAME,SEX,BIRTH_DATE,ADDRESS,E_MAIL,PHONE,CREDIT_CARD,URL_IMG,B_DATE,RE_ENTER")] MEMBER mEMBER)
         {
+            if ( db.MEMBER.Where(a => a.USERNAME.Equals(mEMBER.USERNAME)).Count() != 0)
+            {
+                Response.Write("<script> alert('This username was used.')</script>");
+                return View(mEMBER);
+            }
+
+            if (db.MEMBER.Where(a => a.NATIONAL_ID.Equals(mEMBER.NATIONAL_ID)).Count() != 0)
+            {
+                Response.Write("<script> alert('This national id was used.')</script>");
+                return View(mEMBER);
+            }
+
+            if(mEMBER.PASSWORD != mEMBER.RE_ENTER)
+            {
+                Response.Write("<script> alert('Password and Re-Enter not match.')</script>");
+                return View(mEMBER);
+            }
+
             if (ModelState.IsValid)
             {
                 mEMBER.MEMBER_ID = (short)(db.MEMBER.Count() + 1);

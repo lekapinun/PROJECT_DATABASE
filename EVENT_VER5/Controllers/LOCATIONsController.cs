@@ -16,9 +16,17 @@ namespace EVENT_VER5.Controllers
         private Entities db = new Entities();
 
         // GET: LOCATIONs
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string category, string searchString)
         {
             var lOCATIONs = db.LOCATION.Include(l => l.PROMOTE_L);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                lOCATIONs = lOCATIONs.Where(a => a.LOCATION_NAME.ToLower().Contains(searchString.ToLower()));
+            }
+            if (!string.IsNullOrEmpty(category) && !category.Equals("All"))
+            {
+                lOCATIONs = lOCATIONs.Where(a => a.CATEGORY.Equals(category));
+            }
             return View(await lOCATIONs.ToListAsync());
         }
 

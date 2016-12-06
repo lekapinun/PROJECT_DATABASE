@@ -21,7 +21,7 @@ namespace EVENT_VER5.Controllers
             var eVENT = db.EVENT.Include(e => e.PROMOTE_E);
             if (!string.IsNullOrEmpty(searchString))
             {
-                eVENT = eVENT.Where(a => a.EVENT_NAME.Contains(searchString));
+                eVENT = eVENT.Where(a => a.EVENT_NAME.ToLower().Contains(searchString.ToLower()));
             }
             if (!string.IsNullOrEmpty(category) && !category.Equals("All"))
             {
