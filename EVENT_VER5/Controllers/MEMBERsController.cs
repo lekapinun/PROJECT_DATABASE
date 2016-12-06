@@ -28,17 +28,14 @@ namespace EVENT_VER5.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MEMBER mEMBER = await db.MEMBER.FindAsync(id);
+            var mEMBER = await db.MEMBER.FindAsync(id);
             ViewBag.mem = mEMBER;
-            var query = from m in db.MEMBER
-                        from e in db.EVENT
-                        where m.EVENT1.Contains(e)
-                        select e;
             if (mEMBER == null)
             {
                 return HttpNotFound();
             }
-            return View(await query.ToListAsync());
+            return View(mEMBER);
+            //return View(await db.MEMBER.ToListAsync());
         }
 
         // GET: MEMBERs/Create

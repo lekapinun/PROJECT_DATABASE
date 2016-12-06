@@ -50,11 +50,11 @@
                 <li>@Html.ActionLink("Location", "Index", "LOCATIONs", new { category = "All" }, new { style = "font-weight:bold;" })</li>
                 @if (Session["img"] != null)
                 {
-                    <li><a href="@Url.Action("UsersHome","Home")"> <img src=@Session["img"] class="img-circle mini"> <b>@Session["username"]</b></a></li>
+                    <li><a href="@Url.Action("Details", "MEMBERs", new { id=Session["id"] })"> <img src=@Session["img"] class="img-circle mini"> <b>@Session["username"]</b></a></li>
                 }
                 else
                 {
-                    <li><a href="@Url.Action("UsersHome","Home")"> <img src="http://downloadicons.net/sites/default/files/user-icon-2722.png" class="img-circle mini"> <b>Username</b></a></li>
+                    <li><a href="@Url.Action("Details", "MEMBERs", new { id=Session["id"] })"> <img src="http://downloadicons.net/sites/default/files/user-icon-2722.png" class="img-circle mini"> <b>Username</b></a></li>
                 }
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">

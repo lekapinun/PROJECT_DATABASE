@@ -30,6 +30,7 @@ namespace EVENT_VER5.Controllers
                     {
                         Session["username"] = log.USERNAME;
                         Session["img"] = log.URL_IMG;
+                        Session["id"] = log.MEMBER_ID;
                         return RedirectToAction("Details", "MEMBERs", new { id=log.MEMBER_ID });
                     }
                     else
