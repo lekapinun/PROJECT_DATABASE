@@ -112,7 +112,7 @@
                             <div class="row">
                                 @foreach (var item in Model)
                                 {
-                                    <a href="@Url.Action("Details","EVENTs",new { id=item.ID_LOCATION })" class="col-md-4" style="color: #A82221;">
+                                    <a href="@Url.Action("Details","LOCATIONs",new { id=item.ID_LOCATION })" class="col-md-4" style="color: #A82221;">
                                         <img src=@item.PICTURE class="img-responsive">
                                         <h2>@item.LOCATION_NAME</h2>
                                         <p>

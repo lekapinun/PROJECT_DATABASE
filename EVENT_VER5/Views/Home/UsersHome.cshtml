@@ -1,12 +1,75 @@
-﻿@{
+﻿@model IEnumerable<EVENT_VER5.Models.EVENT>
+
+@{
     ViewBag.Title = "UsersHome";
 }
 
 @if (Session["username"] != null)
 {
-    <text>welcome @Session["username"].ToString() @Html.ActionLink("Logout", "Logout", "Home")</text><br />
-    @Html.ActionLink("Create Event", "Create", "EVENTs")<br />
-    @Html.ActionLink("Create ", "Create", "LOCATIONs")<br />
+    <body>
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <img class="img-responsive  img-thumbnail" src=@ViewBag.mem.URL_IMG>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <h2 style="color: #A82221;">@ViewBag.mem.USERNAME</h2>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
+                        <div class="row">
+                            <section class="comment-list">
+                                <!-- First Comment -->
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                                        <div class="panel panel-default arrow left">
+                                            @foreach (var item in Model)
+                                            {
+                                            <div class="panel-body">
+                                                
+                                                    <div class="comment-post">
+                                                        <a href="@Url.Action("Details", "EVENTs", new { id = item.EVENT_ID })">
+                                                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="padding-top: 10px; padding-bottom: 5px;">
+                                                                <img class="img-responsive  img-thumbnail" src=@item.PICTURE>
+                                                            </div>
+                                                        </a>
+                                                        <div class="col-xs-12 col-sm-12 col-md-8  col-lg-8">
+                                                            <a href="@Url.Action("Details", "EVENTs", new { id = item.EVENT_ID })" style="text-decoration:none;">
+                                                                <h3 style="color:#A82221;">@item.EVENT_NAME</h3>
+                                                            </a>
+                                                            <p>
+                                                                @item.DETAIL
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                
+                                            </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <a href="#" class="col-md-12" style="color: #A82221;">
+                            <img src="imgtest/Mind.png" class="img-responsive">
+                            <h2>A Title</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisici elit,sed eiusmod tempor incidunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud
+                            </p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
 }
 else
 {

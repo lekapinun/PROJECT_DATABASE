@@ -19,15 +19,31 @@
                         <div class="row text-center">
                             <h2 style="color: #A82221;">@ViewBag.mem.USERNAME</h2>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
-                                <a href="@Url.Action("Edit","MEMBERs", new { id = Model.MEMBER_ID})" class="btn btn1 col-xs-12 col-sm-12 col-md-12 col-lg-12 button-site1 ">
-                                    <b>Edit Profile</b>
-                                    <span style="padding: 2px;" class="text-center glyphicon glyphicon-pencil"></span>
+                        @if (Session["id"].ToString() == ViewBag.mem.MEMBER_ID.ToString())
+                        {
+                            <div class="row">
+                                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+                                    <a href="@Url.Action("Edit","MEMBERs", new { id = Model.MEMBER_ID})" class="btn btn1 col-xs-12 col-sm-12 col-md-12 col-lg-12 button-site1 ">
+                                        <b>Edit Profile</b>
+                                        <span style="padding: 2px;" class="text-center glyphicon glyphicon-pencil"></span>
 
-                                </a>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+                                    <a href="@Url.Action("Follow","MEMBERs", new { id = Model.MEMBER_ID})" class="btn btn1 col-xs-12 col-sm-12 col-md-12 col-lg-12 button-site1 ">
+                                        <b>FOLLOW</b>
+                                        <span style="padding: 2px;" class="text-center glyphicon glyphicon-pencil"></span>
+
+                                    </a>
+                                </div>
+                            </div>
+                        }
+
 
                         <div class="row text-center">
                             <h4 style="color: #A82221;">About Me</h4>

@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using EVENT_VER5.Models;
@@ -9,6 +13,8 @@ namespace EVENT_VER5.Controllers
 {
     public class HomeController : Controller
     {
+        private Entities db = new Entities();
+
         public ActionResult Index()
         {
             return View();
@@ -42,9 +48,19 @@ namespace EVENT_VER5.Controllers
             return View();
         }
 
-        public ActionResult UsersHome()
+        public async Task<ActionResult> UsersHome(short? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var mEMBER = await db.MEMBER.FindAsync(id);
+            ViewBag.mem = mEMBER;
+            if (mEMBER == null)
+            {
+                return HttpNotFound();
+            }
+            return View(await db.EVENT.OrderByDescending(a=>a.TIME_START_E).ToListAsync());
         }
 
         public ActionResult Logout()

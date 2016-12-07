@@ -106,13 +106,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.CONDITION_MIN_AGE, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @{
-                        List<SelectListItem> listCon_Sex = new List<SelectListItem>();
-                        listCon_Sex.Add(new SelectListItem { Text = "Male", Value = "Male" });
-                        listCon_Sex.Add(new SelectListItem { Text = "Female", Value = "Female", });
-                        listCon_Sex.Add(new SelectListItem { Text = "None", Value = "None", });
-                    }
-                    @Html.DropDownListFor(model => model.CONDITION_MIN_AGE, listCon_Sex, new { @class = "form-control" })
+                    @Html.EditorFor(model => model.CONDITION_MIN_AGE, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.CONDITION_MIN_AGE, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -128,7 +122,13 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.CONDITION_SEX, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.CONDITION_SEX, new { htmlAttributes = new { @class = "form-control" } })
+                    @{
+                        List<SelectListItem> listCon_Sex = new List<SelectListItem>();
+                        listCon_Sex.Add(new SelectListItem { Text = "Male", Value = "Male" });
+                        listCon_Sex.Add(new SelectListItem { Text = "Female", Value = "Female", });
+                        listCon_Sex.Add(new SelectListItem { Text = "None", Value = "None", });
+                    }
+                    @Html.DropDownListFor(model => model.CONDITION_SEX, listCon_Sex, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.CONDITION_SEX, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -165,17 +165,17 @@
                 </div>
             </div>
         </div>
-                        }
+}
 
-                        <div>
-                            @Html.ActionLink("Back to List", "Index")
-                        </div>
-                        }
-                        else
-                        {
-                            Layout = null;
-                            @Html.Action("Login", "Home")
-                        }
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+}
+else
+{
+    Layout = null;
+    @Html.Action("Login", "Home")
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

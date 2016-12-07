@@ -44,7 +44,7 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
                 @*<li><a href=@Html.Action("UsersHome","Home")><b>Home</b></a></li>*@
-                <li>@Html.ActionLink("Home", "UsersHome", "Home", "", new { style = "font-weight:bold;" })</li>
+                <li>@Html.ActionLink("Home", "UsersHome", "Home", new { id = Session["id"]}, new { style = "font-weight:bold;" })</li>
                 <li>@Html.ActionLink("Event", "Index", "EVENTs", new { category = "All"}, new { style = "font-weight:bold;" })</li>
                 <li>@Html.ActionLink("Location", "Index", "LOCATIONs", new { category = "All" }, new { style = "font-weight:bold;" })</li>
                 @if (Session["img"] != null)

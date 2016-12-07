@@ -94,6 +94,22 @@ namespace EVENT_VER5.Controllers
             return View(mEMBER);
         }
 
+        public async Task<ActionResult> Follow(short id)
+        {
+            FOLLOWING follow_temp = new FOLLOWING();
+            follow_temp.MEMBER_ID = (short)Session["id"];
+            follow_temp.FOLLOWING_ID = (short)id;
+            follow_temp.HISTORY = DateTime.Today;
+            var follow = db.FOLLOWING.Where(m => m.MEMBER_ID.Equals(follow_temp.MEMBER_ID) && m.FOLLOWING_ID.Equals(follow_temp.FOLLOWING_ID)).FirstOrDefault();
+            if (follow != null) 
+            {
+                return RedirectToAction("Details", new { id });
+            }
+            db.FOLLOWING.Add(follow_temp);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Details", new { id });
+        }
+
         // GET: MEMBERs/Edit/5
         public async Task<ActionResult> Edit(short? id)
         {
