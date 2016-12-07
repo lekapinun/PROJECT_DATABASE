@@ -18,7 +18,6 @@ namespace EVENT_VER5.Controllers
         // GET: EVENTs
         public async Task<ActionResult> Index(string category,string searchString)
         {
-            //var eVENT = db.EVENT.Where(t=>t.TIME_START_E > DateTime.Today).Include(e => e.PROMOTE_E);
             var eVENT = db.EVENT.Include(e => e.PROMOTE_E);
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -29,7 +28,6 @@ namespace EVENT_VER5.Controllers
                 eVENT = eVENT.Where(a => a.CATEGORY.Equals(category));
             }
             eVENT = eVENT.OrderBy(t => t.TIME_START_E);
-            //eVENT = eVENT.OrderByDescending(t => t.TIME_START_E);
             return View(await eVENT.ToListAsync());
         }
 
@@ -46,6 +44,17 @@ namespace EVENT_VER5.Controllers
                 return HttpNotFound();
             }
             return View(eVENT);
+        }
+        
+        [HttpPost, ActionName("Details")]
+        public async Task<ActionResult> Join(short id)
+        {
+            EVENT eVENT = await db.EVENT.FindAsync(id);
+            MEMBER mem = await db.MEMBER.FindAsync(Session["id"]);
+            eVENT.MEMBER.Add(mem);
+            //db.Entry(eVENT).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+            return RedirectToAction("Details", new { id = eVENT.EVENT_ID });
         }
 
         // GET: EVENTs/Create
@@ -151,5 +160,6 @@ namespace EVENT_VER5.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

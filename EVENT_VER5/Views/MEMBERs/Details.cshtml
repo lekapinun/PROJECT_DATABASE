@@ -58,19 +58,21 @@
                                     <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
                                         <div class="panel panel-default arrow left">
                                             <div class="panel-body">
-                                                @foreach (var item in Model.EVENT1)
+                                                @foreach (var item in Model.EVENT1.Union(Model.EVENT))
                                                 {
                                                     <div class="comment-post">
-                                                        <a href="#">
+                                                        <a href="@Url.Action("Details","EVENTs", new { id = item.EVENT_ID})">
                                                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="padding-top: 10px; padding-bottom: 5px;">
                                                                 <img class="img-responsive  img-thumbnail" src=@item.PICTURE>
                                                             </div>
                                                         </a>
                                                         <div class="col-xs-12 col-sm-12 col-md-8  col-lg-8">
-                                                            <h3 style="color:#A82221;">@item.EVENT_NAME</h3>
+                                                            <a href="@Url.Action("Details","EVENTs", new { id = item.EVENT_ID})" style="text-decoration:none;">
+                                                                <h3 style="color:#A82221;">@item.EVENT_NAME</h3>
+                                                            </a>
                                                             <p>
                                                                 @item.DETAIL
-                                                            </p>
+                                                             </p>
                                                         </div>
                                                         <div class="col-md-3 col-md-offset-9">
                                                             <a href="#" class="btn btn1 button-site1"><b>Promote</b></a>

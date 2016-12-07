@@ -6,6 +6,8 @@
 
 <h2>Details</h2>
 
+@using (Html.BeginForm("Details", "EVENTs", FormMethod.Post))
+{
 <div>
     <h4>EVENT</h4>
     <hr />
@@ -129,10 +131,11 @@
         <dd>
             @Html.DisplayFor(model => model.PROMOTE_E.TARGET_GENDER)
         </dd>
-
     </dl>
 </div>
 <p>
+    <input type="submit" id="submitbtn" class="btn btn-sm button-site col-md-2 col-lg-2 col-md-offset-4 col-lg-offset-4" value="JOIN ">
     @Html.ActionLink("Edit", "Edit", new { id = Model.EVENT_ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+}
