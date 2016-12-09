@@ -31,7 +31,7 @@
                                 </div>
                             </div>
                         }
-                        else
+                        else if(Model.FOLLOWING1.Where(a=>a.FOLLOWING_ID.Equals(Model.MEMBER_ID)).FirstOrDefault() == null)
                         {
                             <div class="row">
                                 <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">

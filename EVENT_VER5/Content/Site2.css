@@ -359,3 +359,42 @@
 
 
 }
+
+
+/*--------------*/
+
+.create-header {
+    margin-top:30px;
+    margin-left:50px;
+    font-size:45px;
+    text-decoration: underline;
+}
+.create-text {
+    margin-left:50px;
+    margin-right:50px;
+    margin-top:30px;
+}
+.create-text p{
+    font-size:22px;
+}
+.create-text label{
+    margin-right:10px;
+    font-size:20px;
+}
+.create-text button{
+    margin-bottom:20px;
+    margin-left:10px;
+    margin-right:10px;
+}
+.create-text .row{
+    margin-top:20px;
+}
+.create-date-header-top {
+    border-top:2px solid #E0E0E0;
+    margin-bottom:30px;
+}
+.btn-danger-jan {
+  color: black;
+  background-color: #c9c7c5;
+  border-color: #c9c7c5;
+}
