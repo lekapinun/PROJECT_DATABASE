@@ -1,4 +1,4 @@
-﻿@model EVENT_VER5.Models.MEMBER
+﻿@model EVENT_VER5.ViewModel.MEMBERsDetailsViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -13,17 +13,17 @@
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <img class="img-responsive  img-thumbnail" src=@ViewBag.mem.URL_IMG>
+                                <img class="img-responsive  img-thumbnail" src=@Model.mem_profile.URL_IMG>
                             </div>
                         </div>
                         <div class="row text-center">
-                            <h2 style="color: #A82221;">@ViewBag.mem.USERNAME</h2>
+                            <h2 style="color: #A82221;">@Model.mem_profile.USERNAME</h2>
                         </div>
-                        @if (Session["id"].ToString() == ViewBag.mem.MEMBER_ID.ToString())
+                        @if (Session["id"].ToString() == Model.mem_profile.MEMBER_ID.ToString())
                         {
                             <div class="row">
                                 <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
-                                    <a href="@Url.Action("Edit","MEMBERs", new { id = Model.MEMBER_ID})" class="btn btn1 col-xs-12 col-sm-12 col-md-12 col-lg-12 button-site1 ">
+                                    <a href="@Url.Action("Edit","MEMBERs", new { id = @Model.mem_profile.MEMBER_ID})" class="btn btn1 col-xs-12 col-sm-12 col-md-12 col-lg-12 button-site1 ">
                                         <b>Edit Profile</b>
                                         <span style="padding: 2px;" class="text-center glyphicon glyphicon-pencil"></span>
 
@@ -31,11 +31,11 @@
                                 </div>
                             </div>
                         }
-                        else if(Model.FOLLOWING1.Where(a=>a.FOLLOWING_ID.Equals(Model.MEMBER_ID)).FirstOrDefault() == null)
+                        else if(Model.mem_profile.FOLLOWING1.Where(a=>a.FOLLOWING_ID.Equals(Model.mem_profile.MEMBER_ID)).FirstOrDefault() == null)
                         {
                             <div class="row">
                                 <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
-                                    <a href="@Url.Action("Follow","MEMBERs", new { id = Model.MEMBER_ID})" class="btn btn1 col-xs-12 col-sm-12 col-md-12 col-lg-12 button-site1 ">
+                                    <a href="@Url.Action("Follow","MEMBERs", new { id = Model.mem_profile.MEMBER_ID})" class="btn btn1 col-xs-12 col-sm-12 col-md-12 col-lg-12 button-site1 ">
                                         <b>FOLLOW</b>
                                         <span style="padding: 2px;" class="text-center glyphicon glyphicon-pencil"></span>
 
@@ -53,13 +53,13 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <ul style="color: #A82221;">
-                                        <li>Name : @ViewBag.mem.FNAME</li>
-                                        <li>Surname : @ViewBag.mem.LNAME</li>
-                                        <li>Birthday : @String.Format("{0:d}", @ViewBag.mem.BIRTH_DATE)</li>
-                                        <li>Gendar : @ViewBag.mem.SEX</li>
-                                        <li>Phone : @ViewBag.mem.PHONE</li>
-                                        <li>E-mail : @ViewBag.mem.E_MAIL</li>
-                                        <li>Address : @ViewBag.mem.ADDRESS</li>
+                                        <li>Name : @Model.mem_profile.FNAME</li>
+                                        <li>Surname : @Model.mem_profile.LNAME</li>
+                                        <li>Birthday : @String.Format("{0:d}", @Model.mem_profile.BIRTH_DATE)</li>
+                                        <li>Gendar : @Model.mem_profile.SEX</li>
+                                        <li>Phone : @Model.mem_profile.PHONE</li>
+                                        <li>E-mail : @Model.mem_profile.E_MAIL</li>
+                                        <li>Address : @Model.mem_profile.ADDRESS</li>
                                     </ul>
                                 </div>
                             </div>
@@ -67,15 +67,15 @@
 
                         <div class="row text-center" style="padding-top: 10px; padding-bottom: 10px;">
                             <!-- <p class="glyphicon glyphicon-user"> : 10</p> -->
-                            <h4 style="color: #A82221"> Following : @Model.FOLLOWING.Count()</h4>
+                            <h4 style="color: #A82221"> Following : @Model.mem_profile.FOLLOWING.Count()</h4>
 
                         </div>
                         <div class="thumbnail">
-                            <div class="row  " style="margin-top: 10px; margin-bottom: 10px; ">
-                            @foreach (var item in Model.FOLLOWING)
+                            <div class="row  " style="margin-top: 10px; margin-bottom: 10px; margin-left: 20px; ">
+                            @foreach (var item in Model.mem_profile.FOLLOWING)
                             {
                                 <div>    
-                                    <a href="@Url.Action("Details","MEMBERs", new { id = item.MEMBER1.MEMBER_ID})" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: 20px">
+                                    <a href="@Url.Action("Details","MEMBERs", new { id = item.MEMBER1.MEMBER_ID})" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: -8px">
                                     <img class="img-responsive" src=@item.MEMBER1.URL_IMG>
                                     </a>
                                 </div>
@@ -85,15 +85,15 @@
 
                         <div class="row text-center" style="padding-top: 10px; padding-bottom: 10px;">
 
-                            <h4 style="color: #A82221"> Follower : @Model.FOLLOWING1.Count() </h4>
+                            <h4 style="color: #A82221"> Follower : @Model.mem_profile.FOLLOWING1.Count() </h4>
 
                         </div>
                         <div class="thumbnail">
-                            <div class="row  " style="margin-top: 10px; margin-bottom: 10px; ">
+                            <div class="row  " style="margin-top: 10px; margin-bottom: 10px; margin-left: 20px; ">
                                 <div>
-                                    @foreach (var item in Model.FOLLOWING1)
+                                    @foreach (var item in @Model.mem_profile.FOLLOWING1)
                                     {
-                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: 20px">
+                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: -8px">
                                             <img class="img-responsive  " src="@item.MEMBER.URL_IMG">
 
                                         </a>
@@ -115,7 +115,7 @@
                                         <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
                                             <div class="panel panel-default arrow left">
                                                 <div class="panel-body">
-                                                    @foreach (var item in Model.EVENT1.Union(Model.EVENT).Where( a=>a.TIME_START_E > DateTime.Today).OrderByDescending(t => t.TIME_START_E))
+                                                    @foreach (var item in Model.mem_profile.EVENT1.Union(Model.mem_profile.EVENT).Where( a=>a.TIME_START_E > DateTime.Today).OrderByDescending(t => t.TIME_START_E))
                                                     {
                                                         <div class="comment-post">
                                                             <div class="col-md-12">
@@ -134,7 +134,41 @@
                                                                     </p>
                                                                 </div>
 
-                                                                @if (Model.EVENT1.Where(a => a.EVENT_ID.Equals(item.EVENT_ID)).FirstOrDefault() != null)
+                                                                @if (@Model.mem_profile.EVENT1.Where(a => a.EVENT_ID.Equals(item.EVENT_ID)).FirstOrDefault() != null)
+                                                                {
+                                                                    <div class="col-md-3 col-md-offset-9" style="margin-bottom:20px;">
+                                                                        <a href="#" class="btn btn1 button-site1"><b>Promote</b></a>
+                                                                    </div>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <div class="col-md-3 col-md-offset-9" style="margin-bottom:20px;">
+                                                                        @*<a href="#" class="btn btn1 button-site1"><b>Promote</b></a>*@
+                                                                    </div>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    @foreach (var item in Model.mem_profile.LOCATION)
+                                                    {
+                                                        <div class="comment-post">
+                                                            <div class="col-md-12">
+                                                                <a href="@Url.Action("Details","LOCATIONs", new { id = item.ID_LOCATION})">
+                                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="padding-top: 10px; padding-bottom: 5px;">
+                                                                        <img class="img-responsive  img-thumbnail" src=@item.PICTURE>
+                                                                    </div>
+                                                                </a>
+
+                                                                <div class="col-xs-12 col-sm-12 col-md-8  col-lg-8">
+                                                                    <a href="@Url.Action("Details","LOCATIONs", new { id = item.ID_LOCATION})" style="text-decoration:none;">
+                                                                        <h3 style="color:#A82221;">@item.LOCATION_NAME</h3>
+                                                                    </a>
+                                                                    <p>
+                                                                        @item.DETAIL
+                                                                    </p>
+                                                                </div>
+
+                                                                @if (item.MEMBER.Where(a=> a.MEMBER_ID.Equals(Session["username"])).FirstOrDefault() != null)
                                                                 {
                                                                     <div class="col-md-3 col-md-offset-9" style="margin-bottom:20px;">
                                                                         <a href="#" class="btn btn1 button-site1"><b>Promote</b></a>

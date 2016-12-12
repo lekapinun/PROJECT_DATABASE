@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using EVENT_VER5.Models;
+using EVENT_VER5.ViewModel;
 
 namespace EVENT_VER5.Controllers
 {
@@ -24,17 +25,19 @@ namespace EVENT_VER5.Controllers
         // GET: MEMBERs/Details/5
         public async Task<ActionResult> Details(short? id)
         {
+            MEMBERsDetailsViewModel mem = new MEMBERsDetailsViewModel();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var mEMBER = await db.MEMBER.FindAsync(id);
-            ViewBag.mem = mEMBER;
+            mem.mem_profile = mEMBER;
+            //ViewBag.mem = mEMBER;
             if (mEMBER == null)
             {
                 return HttpNotFound();
             }
-            return View(mEMBER);
+            return View(mem);
             //return View(await db.MEMBER.ToListAsync());
         }
 

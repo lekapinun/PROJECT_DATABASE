@@ -6,66 +6,267 @@
 
 @if (Session["username"] != null)
 {
-    <body>
-        <div class="section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <img class="img-responsive  img-thumbnail" src=@ViewBag.mem.URL_IMG>
-                            </div>
-                        </div>
-                        <div class="row text-center">
-                            <h2 style="color: #A82221;">@ViewBag.mem.USERNAME</h2>
-                        </div>
-                    </div>
+    <body style="background-color: #f5f5f5;">
+        <div class="container" style="background-color: #fff ; border-radius: 5px; margin-bottom: 30px; ">
+            <div class="section">
+                <div class="container">
+                    <div class="row">
 
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
-                        <div class="row">
-                            <section class="comment-list">
-                                <!-- First Comment -->
-                                <div class="row">
-                                    <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
-                                        <div class="panel panel-default arrow left">
-                                            @foreach (var item in Model)
-                                            {
-                                            <div class="panel-body">
-                                                
-                                                    <div class="comment-post">
-                                                        <a href="@Url.Action("Details", "EVENTs", new { id = item.EVENT_ID })">
-                                                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="padding-top: 10px; padding-bottom: 5px;">
-                                                                <img class="img-responsive  img-thumbnail" src=@item.PICTURE>
-                                                            </div>
-                                                        </a>
-                                                        <div class="col-xs-12 col-sm-12 col-md-8  col-lg-8">
-                                                            <a href="@Url.Action("Details", "EVENTs", new { id = item.EVENT_ID })" style="text-decoration:none;">
-                                                                <h3 style="color:#A82221;">@item.EVENT_NAME</h3>
-                                                            </a>
-                                                            <p>
-                                                                @item.DETAIL
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                
-                                            </div>
-                                            }
-                                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <img class="img-responsive  img-thumbnail" src="imgtest/Mind.png">
+                                </div>
+                            </div>
+
+
+
+                            <!--  following -->
+
+                            <div class="row text-center" style="padding-top: 10px; padding-bottom: 10px;">
+
+                                <!-- <p class="glyphicon glyphicon-user"> : 10</p> -->
+                                <h4 style="color: #A82221"> Following : 10</h4>
+
+                            </div>
+
+                            <div class="thumbnail">
+                                <div class="row  " style="margin-top: 10px; margin-bottom: 10px; ">
+                                    <div>
+                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: 20px">
+                                            <img class="img-responsive  " src="imgtest/Mind.png">
+
+                                        </a>
+                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: -20px">
+                                            <img class="img-responsive " src="imgtest/Mind.png">
+
+                                        </a>
+                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4   " style="margin-left: -20px">
+                                            <img class="img-responsive  " src="imgtest/Mind.png">
+
+                                        </a>
                                     </div>
                                 </div>
-                            </section>
+                                <div class="row  " style=" margin-top 10px; margin-bottom 10px; ">
+                                    <div>
+                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: 20px">
+                                            <img class="img-responsive  " src="imgtest/Mind.png">
+
+                                        </a>
+                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: -20px">
+                                            <img class="img-responsive " src="imgtest/Mind.png">
+
+                                        </a>
+                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4   " style="margin-left: -20px">
+                                            <img class="img-responsive  " src="imgtest/Mind.png">
+
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="row  " style=" margin-top 10px; margin-bottom 10px; ">
+                                    <div>
+                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 " style="margin-left: 20px">
+                                            <img class="img-responsive  " src="imgtest/Mind.png">
+
+                                        </a>
+                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: -20px">
+                                            <img class="img-responsive " src="imgtest/Mind.png">
+
+                                        </a>
+                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4   " style="margin-left: -20px">
+                                            <img class="img-responsive  " src="imgtest/Mind.png">
+
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--  follower -->
+
+                            <div class="row text-center" style="padding-top: 10px; padding-bottom: 10px;">
+
+                                <h4 style="color: #A82221"> Follower : 1000 </h4>
+
+                            </div>
+
+                            <div class="thumbnail">
+                                <div class="row  " style="margin-top: 10px; margin-bottom: 10px; ">
+                                    <div>
+                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: 20px">
+                                            <img class="img-responsive  " src="imgtest/Mind.png">
+
+                                        </a>
+                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: -20px">
+                                            <img class="img-responsive " src="imgtest/Mind.png">
+
+                                        </a>
+                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4   " style="margin-left: -20px">
+                                            <img class="img-responsive  " src="imgtest/Mind.png">
+
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="row  " style=" margin-top 10px; margin-bottom 10px; ">
+                                    <div>
+                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: 20px">
+                                            <img class="img-responsive  " src="imgtest/Mind.png">
+
+                                        </a>
+                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: -20px">
+                                            <img class="img-responsive " src="imgtest/Mind.png">
+
+                                        </a>
+                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4   " style="margin-left: -20px">
+                                            <img class="img-responsive  " src="imgtest/Mind.png">
+
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="row  " style=" margin-top 10px; margin-bottom 10px; ">
+                                    <div>
+                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 " style="margin-left: 20px">
+                                            <img class="img-responsive  " src="imgtest/Mind.png">
+
+                                        </a>
+                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: -20px">
+                                            <img class="img-responsive " src="imgtest/Mind.png">
+
+                                        </a>
+                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4   " style="margin-left: -20px">
+                                            <img class="img-responsive  " src="imgtest/Mind.png">
+
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <a href="#" class="col-md-12" style="color: #A82221;">
-                            <img src="imgtest/Mind.png" class="img-responsive">
-                            <h2>A Title</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisici elit,sed eiusmod tempor incidunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud
-                            </p>
-                        </a>
+
+
+
+
+
+
+
+
+                        <!--  comment + post -->
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
+                            <div class="row">
+
+
+                                <section class="comment-list">
+                                    <!-- First Comment -->
+                                    <div class="row">
+
+                                        <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                                            <div class="panel panel-default arrow left">
+                                                <div class="panel-body">
+
+
+
+                                                    <div class="comment-post">
+
+
+                                                        <div class="col-md-12">
+                                                            <h3>
+                                                                <a href="#" style=" color #A82221; padding-left 20px; ">
+                                                                    <img src="imgtest/Mind.png" class="img-circle mini"> Username
+                                                                </a>
+                                                            </h3>
+                                                            <a href="#">
+                                                                <div class=" col-xs-12 col-sm-12 col-md-4 col-lg-4" style="padding-top: 10px; padding-bottom: 5px;">
+
+                                                                    <img class="img-responsive  img-thumbnail" src="imgtest/Mind.png">
+                                                                </div>
+                                                            </a>
+
+
+                                                            <div class="col-xs-12 col-sm-12 col-md-8  col-lg-8">
+
+                                                                <h3 style=" color #A82221;">My Event</h3>
+                                                                <p>
+                                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                                                </p>
+
+
+                                                            </div>
+                                                            <div class="col-md-3 col-md-offset-9">
+                                                                <a href="#" class="btn btn1 button-site1"><b>Promote</b></a>
+
+                                                            </div>
+
+                                                        </div>
+
+
+
+                                                    </div>
+                                                    <div class="comment-post">
+
+
+
+
+                                                        <div class="col-md-12">
+                                                            <h3>
+                                                                <a href="#" style=" color #A82221; padding-left 20px; ">
+                                                                    <img src="imgtest/Mind.png" class="img-circle mini"> Username
+                                                                </a>
+                                                            </h3>
+
+
+                                                            <a href="#">
+                                                                <div class=" col-xs-12 col-sm-12 col-md-4 col-lg-4" style="padding-top: 10px; padding-bottom: 5px;">
+
+                                                                    <img class="img-responsive  img-thumbnail" src="imgtest/Mind.png" class="img-responsive">
+
+
+
+
+                                                                </div>
+                                                            </a>
+
+                                                            <div class="col-xs-12 col-sm-12 col-md-8  col-lg-8">
+
+                                                                <h3 style=" color #A82221;">Join Event</h3>
+                                                                <p>
+                                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                                                </p>
+
+
+                                                            </div>
+
+
+                                                        </div>
+
+
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+
+                            </div>
+
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+                            <a href="#" class="col-md-12" style="color: #A82221;">
+                                <img src="imgtest/Mind.png" class="img-responsive">
+                                <h2>A Title</h2>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisici elit,sed eiusmod tempor incidunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud
+                                </p>
+                            </a>
+                        </div>
+
                     </div>
                 </div>
+
             </div>
         </div>
     </body>

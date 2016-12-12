@@ -60,7 +60,8 @@ namespace EVENT_VER5.Controllers
             {
                 return HttpNotFound();
             }
-            return View(await db.EVENT.OrderByDescending(a=>a.TIME_START_E).ToListAsync());
+            return View(await db.EVENT.ToListAsync());
+            //return View(mEMBER);
         }
 
         public ActionResult Logout()
