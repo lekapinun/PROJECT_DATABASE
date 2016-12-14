@@ -42,9 +42,9 @@ namespace EVENT_VER5.Models
         [Required(ErrorMessage = "please enter sex")]
         public string SEX { get; set; }
         [Required(ErrorMessage = "please enter birth day")]
-        public Nullable<System.DateTime> BIRTH_DATE { get; set; }
+        public Nullable<System.DateTime> BIRTH_DATE { get; set; } = DateTime.Today;
         [Required(ErrorMessage = "please enter address")]
-        public string ADDRESS { get; set; }
+        public string ADDRESS { get; set; } 
         [Required(ErrorMessage = "please enter e-mail")]
         public string E_MAIL { get; set; }
         [Required(ErrorMessage = "please enter phone")]
@@ -54,9 +54,9 @@ namespace EVENT_VER5.Models
         public string URL_IMG { get; set; }
 
         [Required(ErrorMessage = "please enter birth day")]
-        public string B_DATE { get; set; }
+        public string B_DATE { get; set; } = "0";
         [Required(ErrorMessage = "please enter re-password")]
-        public string RE_ENTER { get; set; }
+        public string RE_ENTER { get; set; } = "0";
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FOLLOWING> FOLLOWING { get; set; }

@@ -133,13 +133,16 @@ namespace EVENT_VER5.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "MEMBER_ID,NATIONAL_ID,USERNAME,PASSWORD,FNAME,LNAME,SEX,BIRTH_DATE,ADDRESS,E_MAIL,PHONE,CREDIT_CARD,URL_IMG")] MEMBER mEMBER)
+        public async Task<ActionResult> Edit([Bind(Include = "MEMBER_ID,NATIONAL_ID,USERNAME,PASSWORD,FNAME,LNAME,SEX,BIRTH_DATE,ADDRESS,E_MAIL,PHONE,CREDIT_CARD,URL_IMG,B_DATE,RE_ENTER")] MEMBER mEMBER)
         {
             if (ModelState.IsValid)
             {
+                string[] date = mEMBER.B_DATE.Split('-');
+                mEMBER.B_DATE = date[1] + '/' + date[0] + '/' + date[2];
+                mEMBER.BIRTH_DATE = Convert.ToDateTime(mEMBER.B_DATE);
                 db.Entry(mEMBER).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details",new { id = mEMBER.MEMBER_ID});
             }
             return View(mEMBER);
         }

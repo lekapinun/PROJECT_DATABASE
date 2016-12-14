@@ -45,17 +45,31 @@ namespace EVENT_VER5.Controllers
             }
             return View(eVENT);
         }
-        
-        [HttpPost, ActionName("Details")]
+
+
         public async Task<ActionResult> Join(short id)
         {
             EVENT eVENT = await db.EVENT.FindAsync(id);
             MEMBER mem = await db.MEMBER.FindAsync(Session["id"]);
             eVENT.MEMBER.Add(mem);
+          
             //db.Entry(eVENT).State = EntityState.Modified;
             await db.SaveChangesAsync();
             return RedirectToAction("Details", new { id = eVENT.EVENT_ID });
         }
+
+        [HttpPost, ActionName("Details")]
+        public async Task<ActionResult> Join(short id, string user_name)
+        {
+            EVENT eVENT = await db.EVENT.FindAsync(id);
+            MEMBER mem = db.MEMBER.Where(u=>u.USERNAME.Equals(user_name)).FirstOrDefault();
+            eVENT.MEMBER.Add(mem);
+
+            //db.Entry(eVENT).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+            return RedirectToAction("Details", new { id = eVENT.EVENT_ID });
+        }
+
 
         // GET: EVENTs/Create
         public ActionResult Create()
