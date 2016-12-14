@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using EVENT_VER5.Models;
+using EVENT_VER5.ViewModel;
 
 namespace EVENT_VER5.Controllers
 {
@@ -33,16 +34,33 @@ namespace EVENT_VER5.Controllers
         // GET: LOCATIONs/Details/5
         public async Task<ActionResult> Details(short? id)
         {
+            LOCATIONsViewModel lOCATION = new LOCATIONsViewModel();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LOCATION lOCATION = await db.LOCATION.FindAsync(id);
+            lOCATION.location_detail = await db.LOCATION.FindAsync(id);
             if (lOCATION == null)
             {
                 return HttpNotFound();
             }
             return View(lOCATION);
+        }
+
+        [HttpPost, ActionName("Details")]
+        public async Task<ActionResult> Promote(short id, LOCATIONsViewModel promote_location)
+        {
+
+                LOCATION lOCATION = await db.LOCATION.FindAsync(id);
+                MEMBER mEMBER = await db.MEMBER.FindAsync(Session["id"]);
+                promote_location.location_promote = new PROMOTE_L();
+                promote_location.location_promote.PROMOTE_ID = (short)(db.PROMOTE_L.Count() + 1);
+                promote_location.location_promote.END_DATE = DateTime.Today.AddDays(promote_location.day_of_promote);
+                promote_location.location_promote.BUDGETS = (lOCATION.PRICE * 5 * promote_location.day_of_promote)/100;
+                promote_location.location_promote.MEMBER = mEMBER;
+                db.PROMOTE_L.Add(promote_location.location_promote);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Details", new { id = lOCATION.ID_LOCATION });
         }
 
         // GET: LOCATIONs/Create

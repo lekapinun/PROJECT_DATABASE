@@ -1,4 +1,4 @@
-﻿@model EVENT_VER5.Models.LOCATION
+﻿@model EVENT_VER5.ViewModel.LOCATIONsViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -11,23 +11,23 @@
             <div class="container " style="background-color:#fff;border-radius:5px;margin-bottom:30px;">
 
                 <div class="row">
-                    <h1 class="text-center">@Model.LOCATION_NAME</h1>
+                    <h1 class="text-center">@Model.location_detail.LOCATION_NAME</h1>
                 </div>
 
                 <div class="row create-text">
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6  ">
                         <div class="row">
-                            <p>@Model.DETAIL</p>
+                            <p>@Model.location_detail.DETAIL</p>
                         </div>
                         <div class="row">
-                            @foreach (var item in Model.MEMBER)
+                            @foreach (var item in Model.location_detail.MEMBER)
                             {
                                 <p>Owner : @item.FNAME</p>
                             }
-                            <p>Category : @Model.CATEGORY</p>
-                            <p>Facility : @Model.FACILITY</p>
-                            <p>Price : @Model.PRICE Bath per day</p>
-                            @foreach (var item in Model.MEMBER)
+                            <p>Category : @Model.location_detail.CATEGORY</p>
+                            <p>Facility : @Model.location_detail.FACILITY</p>
+                            <p>Price : @Model.location_detail.PRICE Bath per day</p>
+                            @foreach (var item in Model.location_detail.MEMBER)
                             {
                                 <p>Contact : @item.PHONE</p>
                             } 
@@ -36,13 +36,55 @@
 
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="row">
-                            <img class="img-responsive  img-thumbnail" src=@Model.PICTURE>
+                            <img class="img-responsive  img-thumbnail" src=@Model.location_detail.PICTURE>
                         </div>
                     </div>
+                     @if (Model.location_detail.MEMBER.Where(m => m.MEMBER_ID.Equals(Session["id"])).FirstOrDefault() != null)
+                     {
+                        <button type="button" class="btn btn-sm button-site" style="background-color:#EDA23E;" data-toggle="modal" data-target="#myModalP">PROMOTE</button>
 
-                </div>
+                         using (Html.BeginForm())
+                         {
+                            @Html.AntiForgeryToken()
+                            <div class="container">
+                                <div class="modal fade" id="myModalP" role="dialog">
+                                    <div class="modal-dialog modal-lg">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="modal-content">
+                                            <div class="modal-header-jan modal-header">
+                                                <h3 class="modal-title">Budgets and Duration</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row text-modal">
+                                                    <div class="col-md-2 col-md-offset-1">
+                                                        <p>Duration</p>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        @{
+                                                            List<SelectListItem> listItems2 = new List<SelectListItem>();
+                                                            listItems2.Add(new SelectListItem { Text = "1 day (" + (Model.location_detail.PRICE * 0.05).ToString() + " Bath )", Value = "1" });
+                                                            listItems2.Add(new SelectListItem { Text = "7 days (" + (Model.location_detail.PRICE * 7 * 0.05).ToString() + " Bath )", Value = "7" });
+                                                            listItems2.Add(new SelectListItem { Text = "14 days (" + (Model.location_detail.PRICE * 14 * 0.05).ToString() + " Bath )", Value = "14" });
+                                                            listItems2.Add(new SelectListItem { Text = "21 days (" + (Model.location_detail.PRICE * 21 * 0.05).ToString() + " Bath )", Value = "21" });
+                                                            listItems2.Add(new SelectListItem { Text = "28 days (" + (Model.location_detail.PRICE * 28 * 0.05).ToString() + " Bath )", Value = "28" });
+                                                        }
+                                                        @Html.DropDownListFor(model => model.day_of_promote, listItems2, new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(model => model.day_of_promote, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer-j">
+                                                <center>
+                                                    <input type="submit" class="btn btn-default" value="Promote">
+                                                </center>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            }
 
-
+                        }
 
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 create-date-header-top" style="margin-top:20px;">
                 </div>

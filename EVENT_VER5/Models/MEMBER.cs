@@ -53,8 +53,8 @@ namespace EVENT_VER5.Models
         public string CREDIT_CARD { get; set; }
         public string URL_IMG { get; set; }
 
-        [Required(ErrorMessage = "please enter birth day")]
-        public string B_DATE { get; set; } = "0";
+        //[Required(ErrorMessage = "please enter birth day")]
+        //public string B_DATE { get; set; } = "0";
         [Required(ErrorMessage = "please enter re-password")]
         public string RE_ENTER { get; set; } = "0";
 

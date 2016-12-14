@@ -188,6 +188,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\EVENTsViewModel.cs" />
+    <Compile Include="ViewModel\LOCATIONsViewModel.cs" />
     <Compile Include="ViewModel\MEMBERsDetailsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
