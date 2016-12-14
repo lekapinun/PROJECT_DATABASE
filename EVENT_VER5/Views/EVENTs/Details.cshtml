@@ -1,8 +1,10 @@
-﻿@model EVENT_VER5.Models.EVENT
+﻿@model EVENT_VER5.ViewModel.EVENTsViewModel
 
 @{
     ViewBag.Title = "Details";
 }
+
+
 
 @if (Session["username"] != null)
 {
@@ -11,41 +13,40 @@
             <div class="container " style="background-color:#fff;border-radius:5px;margin-bottom:30px;">
 
                 <div class="row">
-                    <h1 class="text-center">@Model.EVENT_NAME</h1>
+                    <h1 class="text-center">@Model.event_detail.EVENT_NAME</h1>
                 </div>
 
                 <div class="row create-text">
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6  ">
                         <div class="row">
-                            <p>@Model.DETAIL</p>
+                            <p>@Model.event_detail.DETAIL</p>
                         </div>
                         <div class="row">
-                            @foreach (var item in Model.MEMBER1)
+                            @foreach (var item in @Model.event_detail.MEMBER1)
                             {
                                 <p>Organize by : @item.FNAME</p>
                             }
-                            <p>Category : @Model.CATEGORY</p>
-                            <p>Start : @Model.TIME_START_E</p>
-                            <p>End : @Model.TIME_END_E</p>
+                            <p>Category : @Model.event_detail.CATEGORY</p>
+                            <p>Start : @Model.event_detail.TIME_START_E</p>
+                            <p>End : @Model.event_detail.TIME_END_E</p>
                             <p>Property </p>
-                            <p>   - Minimum Age : @Model.CONDITION_MIN_AGE</p>
-                            <p>   - Maximum Age : @Model.CONDITION_MAX_AGE</p>
-                            <p>Ticket : @Model.PRICE</p>
-                            <p>Seat : @Model.MEMBER.Count()/@Model.MAX_SEAT</p>
+                            <p>   - Minimum Age : @Model.event_detail.CONDITION_MIN_AGE</p>
+                            <p>   - Maximum Age :@Model.event_detail.CONDITION_MAX_AGE</p>
+                            <p>Ticket : @Model.event_detail.PRICE</p>
+                            <p>Seat : @Model.event_detail.MEMBER.Count()/@Model.event_detail.MAX_SEAT</p>
                         </div>
                         <div class="row">
-                            @if (Model.MEMBER.Where(m => m.MEMBER_ID.Equals(Session["id"])).FirstOrDefault() == null && Model.MEMBER1.Where(m => m.MEMBER_ID.Equals(Session["id"])).FirstOrDefault() == null)
+                            @if (Model.event_detail.MEMBER.Where(m => m.MEMBER_ID.Equals(Session["id"])).FirstOrDefault() == null && Model.event_detail.MEMBER1.Where(m => m.MEMBER_ID.Equals(Session["id"])).FirstOrDefault() == null)
                             {
-                                <input type="submit" name="submitbtn" class="btn btn-sm button-site" value="BUY TICKET" style="margin-right:10px;background-color:#EDA23E;" data-toggle="modal" data-target="#myModal1">
+                                <button type="button" name="submitbtn" class="btn btn-sm button-site" style="margin-right:10px;background-color:#EDA23E;" data-toggle="modal" data-target="#myModal1">BUY TICKIT</button>
                                 <div class="modal fade" id="myModal1" role="dialog">
                                     <div class="modal-dialog">
-                                        <!-- Modal content-->
                                         <div class="modal-content" style="width:350px; height:200px; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); margin-top:250px;">
                                             <div class="text-center" style="margin-top:50px;">
                                                 <h3>Buy ticket</h3>
                                             </div>
                                             <div class="text-center" style="margin-top:30px;">
-                                                @Html.ActionLink("Yes", "Join", new { id = Model.EVENT_ID }, new { @class = "btn btn-default", @style = "width:100px;" })
+                                                @Html.ActionLink("Yes", "Join", new { id = @Model.event_detail.EVENT_ID }, new { @class = "btn btn-default", @style = "width:100px;" })
                                                 <input type="button" class="btn btn-default" style="width:100px;" data-dismiss="modal" value="No">
                                             </div>
 
@@ -54,44 +55,148 @@
                                 </div>
                             }
 
-                            <input type="submit" name="submitbtn" class="btn btn-sm button-site" value="GIFT" style="background-color:#EDA23E;" data-toggle="modal" data-target="#myModal">
+                            <button type="button" name="submitbtn" class="btn btn-sm button-site" style="background-color:#EDA23E;" data-toggle="modal" data-target="#myModal">GIFT</button>
                             <div class="modal fade" id="myModal" role="dialog">
                                 <div class="modal-dialog">
-                                    <!-- Modal content-->
                                     <div class="modal-content" style="width:400px; height:200px;position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); margin-top:250px;">
                                         <div class="text-center" style="margin-top:40px;">
                                             <h3>Gift</h3>
                                         </div>
-@using (Html.BeginForm())
-{
+                                        @using (Html.BeginForm())
+                                        {
                                         <div class="row">
                                             <div id="send">Send to</div>
                                             @Html.TextBox("user_name", null, new { @type = "search", @id = "in" })
-                                            @*<div id="in"><input type="text"></div>*@
                                         </div>
                                         <div class="row text-center">
 
-                                            @*@Html.ActionLink("send", "Join", new { id = Model.EVENT_ID }, new { @class = "btn btn-default" })*@
                                             <input type="submit" class="btn btn-default" value="send">
 
                                             <input type="button" class="btn btn-default" data-dismiss="modal" value="cancle">
                                         </div>
-}
+                                        }
                                     </div>
                                 </div>
                             </div>
+
+                            @if (@Model.event_detail.MEMBER1.Where(m => m.MEMBER_ID.Equals(Session["id"])).FirstOrDefault() != null)
+                            {
+                                <button type="button" class="btn btn-sm button-site" style="background-color:#EDA23E;" data-toggle="modal" data-target="#myModalP">PROMOTE</button>
+
+                                using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="container">
+                                        <div class="modal fade" id="myModalP" role="dialog">
+                                            <div class="modal-dialog modal-lg">
+                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                <div class="modal-content">
+                                                    <div class="modal-header-jan modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h3 class="modal-title">Target Group</h3>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div>
+                                                            <div class="gender">
+                                                                <div class="row">
+                                                                    <div class="col-xs-4 col-sm-4 col-md-2 col-lg-2">
+                                                                        Gender &nbsp; &nbsp;
+                                                                    </div>
+                                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                                        @{
+                                                                            List<SelectListItem> listItems = new List<SelectListItem>();
+                                                                            listItems.Add(new SelectListItem { Text = "Male", Value = "Male" });
+                                                                            listItems.Add(new SelectListItem { Text = "Female", Value = "Female", });
+                                                                            listItems.Add(new SelectListItem { Text = "All", Value = "All" });
+                                                                        }
+                                                                        @Html.DropDownListFor(model => model.event_promote.TARGET_GENDER, listItems, new { @class = " form-control ", @style = "width:150px;" })
+                                                                        @Html.ValidationMessageFor(model => model.event_promote.TARGET_GENDER, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="age" style="display: inline-flex;">
+                                                                Age &nbsp; &nbsp;
+                                                                <div class="input-group-j input-group-sm">
+                                                                    @Html.EditorFor(model => model.event_promote.TARGET_MIN_AGE, new { htmlAttributes = new { @type = "text", @class = "form-control", @placeholder = "min" } })
+                                                                    @Html.ValidationMessageFor(model => model.event_promote.TARGET_MIN_AGE, "", new { @class = "text-danger" })
+                                                                </div> &nbsp; to &nbsp;
+                                                                <div class="input-group-j input-group-sm">
+                                                                    @Html.EditorFor(model => model.event_promote.TARGET_MAX_AGE, new { htmlAttributes = new { @type = "text", @class = "form-control", @placeholder = "min" } })
+                                                                    @Html.ValidationMessageFor(model => model.event_promote.TARGET_MIN_AGE, "", new { @class = "text-danger" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="interest">
+                                                                <div class="row">
+                                                                    <div class="col-xs-4 col-sm-4 col-md-2 col-lg-2">
+                                                                        Interest &nbsp; &nbsp;
+                                                                    </div>
+                                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                                        @{
+                                                                            List<SelectListItem> listItems1 = new List<SelectListItem>();
+                                                                            listItems1.Add(new SelectListItem { Text = "Sport", Value = "Sport" });
+                                                                            listItems1.Add(new SelectListItem { Text = "Entertainment", Value = "Entertainment", });
+                                                                            listItems1.Add(new SelectListItem { Text = "Talk show", Value = "Talk show" });
+                                                                            listItems1.Add(new SelectListItem { Text = "Seminar", Value = "Seminar", });
+                                                                            listItems1.Add(new SelectListItem { Text = "Marketing", Value = "Marketing" });
+                                                                            listItems1.Add(new SelectListItem { Text = "Wedding", Value = "Wedding" });
+                                                                            listItems1.Add(new SelectListItem { Text = "Academic", Value = "Academic" });
+                                                                            listItems1.Add(new SelectListItem { Text = "Technology", Value = "Technology" });
+                                                                            listItems1.Add(new SelectListItem { Text = "Culture", Value = "Culture" });
+                                                                            listItems1.Add(new SelectListItem { Text = "Charity", Value = "Charity" });
+                                                                            listItems1.Add(new SelectListItem { Text = "ETC.", Value = "ETC.", });
+                                                                        }
+                                                                        @Html.DropDownListFor(model => model.event_promote.TARGET_INTEREST, listItems1, new { @class = "form-control " })
+                                                                        @Html.ValidationMessageFor(model => model.event_promote.TARGET_INTEREST, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-header-jan modal-header">
+                                                        <h3 class="modal-title">Budgets and Duration</h3>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row text-modal">
+                                                            <div class="col-md-2 col-md-offset-1">
+                                                                <p>Duration</p>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                    @{
+                                                                        List<SelectListItem> listItems2 = new List<SelectListItem>();
+                                                                        listItems2.Add(new SelectListItem { Text = "1 day (" + (100).ToString() + " Bath )", Value = "100" });
+                                                                        listItems2.Add(new SelectListItem { Text = "7 days (" + (699).ToString() + " Bath )", Value = "699" });
+                                                                        listItems2.Add(new SelectListItem { Text = "14 days (" + (1399).ToString() + " Bath )", Value = "1399" });
+                                                                        listItems2.Add(new SelectListItem { Text = "21 days (" + (1999).ToString() + " Bath )", Value = "1999" });
+                                                                        listItems2.Add(new SelectListItem { Text = "28 days (" + (2500).ToString() + " Bath )", Value = "2500" });
+                                                                    }
+                                                                    @Html.DropDownListFor(model => model.day_of_promote, listItems2, new { @class = "form-control" })
+                                                                    @Html.ValidationMessageFor(model => model.day_of_promote, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer-j">
+                                                        <center>
+                                                            <input type="submit" class="btn btn-default" value="Promote">
+                                                        </center>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
 
                         </div>
                     </div>
 
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="row">
-                            <img class="img-responsive  img-thumbnail" src=@Model.PICTURE>
+                            <img class="img-responsive  img-thumbnail" src=@Model.event_detail.PICTURE>
                         </div>
-                        @if (Model.VIDEO != null)
+                        @if (@Model.event_detail.VIDEO != null)
                         {
                             <div class="row embed-responsive embed-responsive-4by3">
-                                <iframe class="embed-responsive-item" style="width:100%; height:270px;" src=@Model.VIDEO allowfullscreen></iframe>
+                                <iframe class="embed-responsive-item" style="width:100%; height:270px;" src=@Model.event_detail.VIDEO allowfullscreen></iframe>
                             </div>
                         }
                     </div>

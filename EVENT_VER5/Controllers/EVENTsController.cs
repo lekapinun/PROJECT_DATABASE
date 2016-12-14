@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using EVENT_VER5.Models;
+using EVENT_VER5.ViewModel;
 
 namespace EVENT_VER5.Controllers
 {
@@ -34,11 +35,12 @@ namespace EVENT_VER5.Controllers
         // GET: EVENTs/Details/5
         public async Task<ActionResult> Details(short? id)
         {
+            EVENTsViewModel eVENT = new EVENTsViewModel();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EVENT eVENT = await db.EVENT.FindAsync(id);
+            eVENT.event_detail = await db.EVENT.FindAsync(id);
             if (eVENT == null)
             {
                 return HttpNotFound();
@@ -59,15 +61,29 @@ namespace EVENT_VER5.Controllers
         }
 
         [HttpPost, ActionName("Details")]
-        public async Task<ActionResult> Join(short id, string user_name)
+        public async Task<ActionResult> JoinAndPromote(short id, string user_name, EVENTsViewModel promote_event)
         {
-            EVENT eVENT = await db.EVENT.FindAsync(id);
-            MEMBER mem = db.MEMBER.Where(u=>u.USERNAME.Equals(user_name)).FirstOrDefault();
-            eVENT.MEMBER.Add(mem);
+            if (user_name != null)
+            {
+                EVENT eVENT = await db.EVENT.FindAsync(id);
+                MEMBER mem = db.MEMBER.Where(u => u.USERNAME.Equals(user_name)).FirstOrDefault();
+                eVENT.MEMBER.Add(mem);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Details", new { id = eVENT.EVENT_ID });
+            }
+            else
+            {
+                EVENT eVENT = await db.EVENT.FindAsync(id);
+                MEMBER mEMBER = await db.MEMBER.FindAsync(Session["id"]);
+                promote_event.event_promote.PROMOTE_ID = (short)(db.PROMOTE_E.Count()+1);
+                promote_event.event_promote.END_DATE = DateTime.Today.AddDays(promote_event.day_of_promote);
+                promote_event.event_promote.BUDGETS = promote_event.day_of_promote;
+                promote_event.event_promote.MEMBER = mEMBER;
+                db.PROMOTE_E.Add(promote_event.event_promote);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Details", new { id = eVENT.EVENT_ID });
+            }
 
-            //db.Entry(eVENT).State = EntityState.Modified;
-            await db.SaveChangesAsync();
-            return RedirectToAction("Details", new { id = eVENT.EVENT_ID });
         }
 
 
