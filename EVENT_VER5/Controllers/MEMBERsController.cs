@@ -23,6 +23,12 @@ namespace EVENT_VER5.Controllers
             return View(mEMBER);
         }
 
+        public async Task<ActionResult> Index2(short id)
+        {
+            var mEMBER = await db.MEMBER.FindAsync(id);
+            return View(mEMBER);
+        }
+
         // GET: MEMBERs/Details/5
         public async Task<ActionResult> Details(short? id)
         {

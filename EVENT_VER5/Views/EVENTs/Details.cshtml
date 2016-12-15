@@ -236,7 +236,7 @@
                         @foreach (var item in Model.event_for_promote)
                         {
                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3  ">
-                                <a href="@Url.Action("Details","EVENTs", new { id = @item.EVENT.FirstOrDefault().EVENT_ID })">
+                                <a href="@Url.Action("Details","EVENTs", new { id = @item.EVENT.FirstOrDefault().EVENT_ID , id_mem = Session["id"] })">
                                     <img class="img-responsive  img-thumbnail" src="@item.EVENT.FirstOrDefault().PICTURE">
                                     <p style="color:#A82221;">@item.EVENT.FirstOrDefault().DETAIL</p>
                                 </a>

@@ -62,7 +62,7 @@ namespace EVENT_VER5.Controllers
         }
 
         // GET: EVENTs/Details/5
-        public async Task<ActionResult> Details(short? id)
+        public async Task<ActionResult> Details(short? id, short id_mem)
         {
             EVENTsViewModel eVENT = new EVENTsViewModel();
             if (id == null)
@@ -70,6 +70,7 @@ namespace EVENT_VER5.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             eVENT.event_detail = await db.EVENT.FindAsync(id);
+            eVENT.mem = await db.MEMBER.FindAsync(id_mem);
             int i = 0;
             if (db.PROMOTE_E.Count() < 4)
             {
@@ -79,7 +80,11 @@ namespace EVENT_VER5.Controllers
             {
                 i = 4;
             }
-            eVENT.event_for_promote = db.PROMOTE_E.Where(a => a.END_DATE > DateTime.Today).OrderBy(x => Guid.NewGuid()).Take(i).ToList(); ;
+            DateTime today = DateTime.Today;
+            DateTime b_day = Convert.ToDateTime(eVENT.mem.BIRTH_DATE.ToString());
+            int age = today.Year - b_day.Year;
+            if (b_day > today.AddYears(-age)) age--;
+            eVENT.event_for_promote = db.PROMOTE_E.Where(a => a.END_DATE > DateTime.Today && a.TARGET_MIN_AGE < age && a.TARGET_MAX_AGE > age ).OrderBy(x => Guid.NewGuid()).Take(i).ToList(); ;
             if (eVENT == null)
             {
                 return HttpNotFound();
@@ -92,7 +97,20 @@ namespace EVENT_VER5.Controllers
         {
             EVENT eVENT = await db.EVENT.FindAsync(id);
             MEMBER mem = await db.MEMBER.FindAsync(Session["id"]);
-            eVENT.MEMBER.Add(mem);
+            DateTime today = DateTime.Today;
+            DateTime b_day = Convert.ToDateTime(mem.BIRTH_DATE.ToString());
+            int age = today.Year - b_day.Year;
+            if (b_day > today.AddYears(-age)) age--;
+            if (age < eVENT.CONDITION_MIN_AGE || age > eVENT.CONDITION_MAX_AGE)
+            {
+                Response.Write("<script> alert('You not suitable.')</script>");
+                return RedirectToAction("Details", new { id = eVENT.EVENT_ID });
+            }
+            if (mem.SEX != eVENT.CONDITION_SEX && eVENT.CONDITION_SEX != "None")
+            {
+                Response.Write("<script> alert('You not suitable.')</script>");
+                return RedirectToAction("Details", new { id = eVENT.EVENT_ID });
+            }
             //db.Entry(eVENT).State = EntityState.Modified;
             
 
@@ -153,7 +171,7 @@ namespace EVENT_VER5.Controllers
             Event createdEvent = request.Execute();
             //Console.WriteLine("Event created: {0}", createdEvent.HtmlLink);
 
-
+            eVENT.MEMBER.Add(mem);
             await db.SaveChangesAsync();
             return RedirectToAction("Details", new { id = eVENT.EVENT_ID });
 
@@ -217,7 +235,7 @@ namespace EVENT_VER5.Controllers
 
                 db.EVENT.Add(eVENT);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = eVENT.EVENT_ID, id_mem = eVENT.MEMBER1.FirstOrDefault().MEMBER_ID});
             }
 
             ViewBag.PROMOTE_E_ID = new SelectList(db.PROMOTE_E, "PROMOTE_ID", "TARGET_GENDER", eVENT.PROMOTE_E_ID);
@@ -250,7 +268,7 @@ namespace EVENT_VER5.Controllers
             {
                 db.Entry(eVENT).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Details", new { id = eVENT.EVENT_ID });
+                return RedirectToAction("Details", new { id = eVENT.EVENT_ID , id_mem = eVENT.MEMBER1.FirstOrDefault().MEMBER_ID });
             }
             ViewBag.PROMOTE_E_ID = new SelectList(db.PROMOTE_E, "PROMOTE_ID", "TARGET_GENDER", eVENT.PROMOTE_E_ID);
             return View(eVENT);

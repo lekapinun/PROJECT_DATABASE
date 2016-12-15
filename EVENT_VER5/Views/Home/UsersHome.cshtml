@@ -34,7 +34,7 @@
                                         {
                                             <div>
                                                 <a href="@Url.Action("Details","MEMBERs", new { id = item.MEMBER1.MEMBER_ID})" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: -8px">
-                                                    <img class="img-responsive" src=@item.MEMBER1.URL_IMG>
+                                                    <img class="img-responsive" src=item.MEMBER1.URL_IMG>
                                                 </a>
                                             </div>
                                         }
@@ -55,7 +55,7 @@
                                             @foreach (var item in Model.member.FOLLOWING1)
                                             {
                                                 <a href="@Url.Action("Details","MEMBERs", new { id = item.MEMBER.MEMBER_ID})" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: -8px">
-                                                    <img class="img-responsive  " src="@item.MEMBER.URL_IMG">
+                                                    <img class="img-responsive  " src="item.MEMBER.URL_IMG">
 
                                                 </a>
                                             }
@@ -98,16 +98,16 @@
                                                                             Join event
                                                                         </a>
                                                                     </h3>
-                                                                    <a href="@Url.Action("Details","EVENTs",new { id=item.EVENT_ID })">
+                                                                    <a href="@Url.Action("Details","EVENTs",new { id=item.EVENT_ID , id_mem = Session["id"]})">
                                                                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="padding-top: 10px; padding-bottom: 5px;">
-                                                                            <img class="img-responsive  img-thumbnail" src="@item.PICTURE">
+                                                                            <img class="img-responsive  img-thumbnail" src="item.PICTURE">
                                                                         </div>
                                                                     </a>
                                                                     <div class="col-xs-12 col-sm-12 col-md-8  col-lg-8">
 
-                                                                        <h3 style="color :#A82221;">@item.EVENT_NAME</h3>
+                                                                        <h3 style="color :#A82221;">item.EVENT_NAME</h3>
                                                                         <p>
-                                                                            @item.DETAIL
+                                                                            item.DETAIL
                                                                         </p>
                                                                     </div>
                                                                 </div>

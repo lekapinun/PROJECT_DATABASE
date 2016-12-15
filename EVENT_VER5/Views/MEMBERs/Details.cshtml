@@ -31,14 +31,12 @@
                                     </div>
                                 </div>
                             }
-                            else if (Model.mem_profile.FOLLOWING.Where(a => a.FOLLOWING_ID.Equals(Model.mem_profile.MEMBER_ID)).FirstOrDefault() == null)
+                            else if (Model.mem_profile.FOLLOWING.Where(a => a.FOLLOWING_ID.Equals(Session["id"])).FirstOrDefault() == null)
                             {
                                 <div class="row">
                                     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
                                         <a href="@Url.Action("Follow","MEMBERs", new { id = @Model.mem_profile.MEMBER_ID})" class="btn btn1 col-xs-12 col-sm-12 col-md-12 col-lg-12 button-site1 ">
                                             <b>FOLLOW</b>
-                                            <span style="padding: 2px;" class="text-center glyphicon glyphicon-pencil"></span>
-
                                         </a>
                                     </div>
                                 </div>
@@ -86,7 +84,7 @@
                             {
                                 <div class="row text-center" style="padding-top: 10px; padding-bottom: 10px;">
                                     <!-- <p class="glyphicon glyphicon-user"> : 10</p> -->
-                                    <a>
+                                    <a href="@Url.Action("Index", new { id = Session["id"]})">
                                         <h4 style="color: #A82221"> Following : @Model.mem_profile.FOLLOWING.Count()</h4>
                                     </a>
 
@@ -108,9 +106,9 @@
                             @if (Model.mem_profile.FOLLOWING1.Count() != 0)
                             {
                                 <div class="row text-center" style="padding-top: 10px; padding-bottom: 10px;">
-
-                                    <h4 style="color: #A82221"> Follower : @Model.mem_profile.FOLLOWING1.Count() </h4>
-
+                                    <a href="@Url.Action("Index2", new { id = Session["id"]})">
+                                        <h4 style="color: #A82221"> Follower : @Model.mem_profile.FOLLOWING1.Count() </h4>
+                                    </a>
                                 </div>
                                 <div class="thumbnail">
                                     <div class="row  " style="margin-top: 10px; margin-bottom: 10px; margin-left: 20px; ">
@@ -154,7 +152,7 @@
                                                     {
                                                         <div class="comment-post">
                                                             <div class="col-md-12">
-                                                                <a href="@Url.Action("Details","EVENTs", new { id = @item.EVENT_ID})">
+                                                                <a href="@Url.Action("Details","EVENTs", new { id = @item.EVENT_ID , id_mem = Session["id"]})">
                                                                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="padding-top: 10px; padding-bottom: 5px;">
                                                                         <img class="img-responsive  img-thumbnail" src=@item.PICTURE>
                                                                     </div>
