@@ -9,12 +9,25 @@ using System.Web;
 using System.Web.Mvc;
 using EVENT_VER5.Models;
 using EVENT_VER5.ViewModel;
+using System.Text;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Calendar.v3;
+using Google.Apis.Calendar.v3.Data;
+using Google.Apis.Services;
+using Google.Apis.Util.Store;
+using System.IO;
+using System.Threading;
 
 namespace EVENT_VER5.Controllers
 {
     public class EVENTsController : Controller
     {
         private Entities db = new Entities();
+
+        // If modifying these scopes, delete your previously saved credentials
+        // at ~/.credentials/calendar-dotnet-quickstart.json
+        static string[] Scopes = { CalendarService.Scope.Calendar };
+        static string ApplicationName = "Google Calendar API .NET Quickstart";
 
         // GET: EVENTs
         public async Task<ActionResult> Index(string category,string searchString)
@@ -80,10 +93,71 @@ namespace EVENT_VER5.Controllers
             EVENT eVENT = await db.EVENT.FindAsync(id);
             MEMBER mem = await db.MEMBER.FindAsync(Session["id"]);
             eVENT.MEMBER.Add(mem);
-          
             //db.Entry(eVENT).State = EntityState.Modified;
+            
+
+            UserCredential credential;
+            using (var stream = new FileStream("../../Users/LekApinun/Documents/Visual Studio 2015/Projects/EVENT_VER5/PROJECT_DATABASE/EVENT_VER5/client_secret.json", FileMode.Open, FileAccess.Read))
+            {
+                string credPath = System.Environment.GetFolderPath(
+                    System.Environment.SpecialFolder.Personal);
+                credPath = Path.Combine(credPath, ".credentials/calendar-dotnet-quickstart.json");
+
+                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.Load(stream).Secrets, Scopes, "user", CancellationToken.None, new FileDataStore(credPath, true)).Result;
+                //Console.WriteLine("Credential file saved to: " + credPath);
+            }
+
+            // Create Google Calendar API service.
+            var service = new CalendarService(new BaseClientService.Initializer()
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = ApplicationName,
+            });
+
+            string start = eVENT.TIME_START_E.ToString();
+            DateTime startT = Convert.ToDateTime(start);
+            start = startT.Year.ToString() + '-' + startT.Month.ToString() + '-' + startT.Day.ToString() + 'T' + startT.TimeOfDay + "+07:00" ;
+
+            string end = eVENT.TIME_END_E.ToString();
+            DateTime endT = Convert.ToDateTime(end);
+            end = endT.Year.ToString() + '-' + endT.Month.ToString() + '-' + endT.Day.ToString() + 'T' + endT.TimeOfDay + "+07:00";
+
+
+            Event newEvent = new Event()
+            {
+                Summary = eVENT.EVENT_NAME.ToString(),
+                Location = eVENT.LOCATION.ToString(),
+                Description = eVENT.DETAIL.ToString(),
+                Start = new EventDateTime()
+                {
+                    DateTime = DateTime.Parse(start),
+                    TimeZone = "Asia/Bangkok",
+                },
+                End = new EventDateTime()
+                {
+                    DateTime = DateTime.Parse(end),
+                    TimeZone = "Asia/Bangkok",
+                },
+                Attendees = new EventAttendee[] 
+                {
+                    new EventAttendee()
+                    {
+                        Email = mem.E_MAIL.ToString() ,
+                        ResponseStatus = "needsAction"
+                    }
+                }
+            };
+
+            String calendarId = "primary";
+            EventsResource.InsertRequest request = service.Events.Insert(newEvent, calendarId);
+            Event createdEvent = request.Execute();
+            //Console.WriteLine("Event created: {0}", createdEvent.HtmlLink);
+
+
             await db.SaveChangesAsync();
             return RedirectToAction("Details", new { id = eVENT.EVENT_ID });
+
+
         }
 
         [HttpPost, ActionName("Details")]

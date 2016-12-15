@@ -17,9 +17,10 @@ namespace EVENT_VER5.Controllers
         private Entities db = new Entities();
 
         // GET: MEMBERs
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(short id)
         {
-            return View(await db.MEMBER.ToListAsync());
+            var mEMBER = await db.MEMBER.FindAsync(id);
+            return View(mEMBER);
         }
 
         // GET: MEMBERs/Details/5
