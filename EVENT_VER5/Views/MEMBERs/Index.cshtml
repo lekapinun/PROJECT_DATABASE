@@ -11,19 +11,21 @@
             <div class="section">
                 <div class="container">
                     <div class="row" style="padding-top:20px;padding-bottom:20px;">
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="col-md-12 col-lg-12">
                             @foreach (var item in Model.FOLLOWING)
                             {
-                                <a href="@Url.Action("Details", new { id = item.MEMBER1.MEMBER_ID})">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                            <img class="img-responsive  img-thumbnail" src=@item.MEMBER1.URL_IMG>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    <a href="@Url.Action("Details", new { id = item.MEMBER1.MEMBER_ID })">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                <img class="img-responsive  img-thumbnail" src=@item.MEMBER1.URL_IMG>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row text-center">
-                                        <h2 style="color: #A82221;">@item.MEMBER1.USERNAME</h2>
-                                    </div>
-                                </a>
+                                        <div class="row text-center">
+                                            <h2 style="color: #A82221;">@item.MEMBER1.USERNAME</h2>
+                                        </div>
+                                    </a>
+                            </div>
                             }
                         </div>
                     </div>

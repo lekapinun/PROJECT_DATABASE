@@ -31,7 +31,7 @@
                                     </div>
                                 </div>
                             }
-                            else if (Model.mem_profile.FOLLOWING.Where(a => a.FOLLOWING_ID.Equals(Session["id"])).FirstOrDefault() == null)
+                            else if (Model.mem_profile.FOLLOWING.Where(a => a.FOLLOWING_ID.Equals(Model.mem_profile.MEMBER_ID)).FirstOrDefault() == null)
                             {
                                 <div class="row">
                                     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
@@ -84,7 +84,7 @@
                             {
                                 <div class="row text-center" style="padding-top: 10px; padding-bottom: 10px;">
                                     <!-- <p class="glyphicon glyphicon-user"> : 10</p> -->
-                                    <a href="@Url.Action("Index", new { id = Session["id"]})">
+                                    <a href="@Url.Action("Index", new { id = @Model.mem_profile.MEMBER_ID })">
                                         <h4 style="color: #A82221"> Following : @Model.mem_profile.FOLLOWING.Count()</h4>
                                     </a>
 
@@ -106,7 +106,7 @@
                             @if (Model.mem_profile.FOLLOWING1.Count() != 0)
                             {
                                 <div class="row text-center" style="padding-top: 10px; padding-bottom: 10px;">
-                                    <a href="@Url.Action("Index2", new { id = Session["id"]})">
+                                    <a href="@Url.Action("Index2", new { id = @Model.mem_profile.MEMBER_ID })">
                                         <h4 style="color: #A82221"> Follower : @Model.mem_profile.FOLLOWING1.Count() </h4>
                                     </a>
                                 </div>
@@ -148,7 +148,7 @@
                                                         </div>
                                                     }
 
-                                                    @foreach (var item in Model.mem_profile.EVENT.Where(a => a.TIME_START_E > DateTime.Today).OrderByDescending(t => t.TIME_START_E))
+                                                    @foreach (var item in Model.mem_profile.EVENT.Union(Model.mem_profile.EVENT1).Where(a => a.TIME_START_E > DateTime.Today).OrderByDescending(t => t.TIME_START_E))
                                                     {
                                                         <div class="comment-post">
                                                             <div class="col-md-12">
