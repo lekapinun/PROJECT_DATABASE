@@ -114,14 +114,13 @@ namespace EVENT_VER5.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "ID_LOCATION,LOCATION_NAME,CATEGORY,DETAIL,PICTURE,TIME_START_L,TIME_END_L,ADDRESS,FACILITY,PRICE,AREA,PROMOTE_L_ID")] LOCATION lOCATION)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(lOCATION).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = lOCATION.ID_LOCATION});
             }
             ViewBag.PROMOTE_L_ID = new SelectList(db.PROMOTE_L, "PROMOTE_ID", "PROMOTE_ID", lOCATION.PROMOTE_L_ID);
             return View(lOCATION);

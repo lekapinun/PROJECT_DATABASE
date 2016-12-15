@@ -63,8 +63,8 @@ else
                                     <p class="control-label">Birthday</p>
                                 </div>
                                 <div class="col-sm-10 col-md-4 col-lg-5 ">
-                                    @Html.EditorFor(model => model.B_DATE, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
-                                    @Html.ValidationMessageFor(model => model.B_DATE, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.BIRTH_DATE, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                    @Html.ValidationMessageFor(model => model.BIRTH_DATE, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
@@ -90,7 +90,7 @@ else
                                     <p class="control-label">Profile picture</p>
                                 </div>
                                 <div class="col-sm-10 col-md-4 col-lg-11 ">
-                                    @Html.TextAreaFor(model => model.URL_IMG, new { @class = "form-control", @placeholder = "Profile picture")
+                                    @Html.TextAreaFor(model => model.URL_IMG, new { @class = "form-control", @placeholder = "Profile picture" })
                                     @Html.ValidationMessageFor(model => model.URL_IMG, "", new { @class = "text-danger" })
                                 </div>
                             </div>

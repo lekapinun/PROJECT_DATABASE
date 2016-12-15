@@ -66,7 +66,19 @@ namespace EVENT_VER5.Controllers
                 return View(mEMBER);
             }
 
-            if(mEMBER.PASSWORD != mEMBER.RE_ENTER)
+            if (mEMBER.NATIONAL_ID.ToString().Length != 13)
+            {
+                Response.Write("<script> alert('National ID incorrect.')</script>");
+                return View(mEMBER);
+            }
+
+            if (mEMBER.CREDIT_CARD.Length < 13 || mEMBER.CREDIT_CARD.Length > 16)
+            {
+                Response.Write("<script> alert('CREDIT CARD incorrect.')</script>");
+                return View(mEMBER);
+            }
+
+            if (mEMBER.PASSWORD != mEMBER.RE_ENTER)
             {
                 Response.Write("<script> alert('Password and Re-Enter not match.')</script>");
                 return View(mEMBER);
@@ -91,7 +103,7 @@ namespace EVENT_VER5.Controllers
 
                 db.MEMBER.Add(mEMBER);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login","Home");
             }
 
             return View(mEMBER);
