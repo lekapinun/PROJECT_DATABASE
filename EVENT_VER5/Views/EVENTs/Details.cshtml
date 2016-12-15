@@ -117,6 +117,9 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer-j">
+                                                        <p class="text-center" style="color:red;">
+                                                            *If you promote it. You can't edit it anymore.
+                                                        </p>
                                                         <center>
                                                             <input type="submit" class="btn btn-default" value="Promote">
                                                         </center>
@@ -150,6 +153,20 @@
                             <p>   - Maximum Age : @Model.event_detail.CONDITION_MAX_AGE</p>
                             <p>Ticket : @Model.event_detail.PRICE</p>
                             <p>Seat : @Model.event_detail.MEMBER.Count()/@Model.event_detail.MAX_SEAT</p>
+                            <div class="row">
+
+                            </div>
+                            @foreach (var m in Model.event_detail.MEMBER.OrderBy(x => Guid.NewGuid()).Take(Model.event_detail.MEMBER.Count))
+                            {
+                                i++;
+                                <a href="@Url.Action("Details","MEMBERs",new { id=m.MEMBER_ID })">
+                                    <img src="@m.URL_IMG" class="img-circle mini">
+                                </a>
+                                if (i > 10)
+                                {
+                                    break;
+                                }
+                            }
                         </div>
                         <div class="row">
                             @if (Model.event_detail.MEMBER.Where(m => m.MEMBER_ID.Equals(Session["id"])).FirstOrDefault() == null && Model.event_detail.MEMBER1.Where(m => m.MEMBER_ID.Equals(Session["id"])).FirstOrDefault() == null)
@@ -208,7 +225,6 @@
                             </div>
                         }
                     </div>
-
                 </div>
 
 
@@ -220,7 +236,7 @@
                         @foreach (var item in Model.event_for_promote)
                         {
                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3  ">
-                                <a href="#">
+                                <a href="@Url.Action("Details","EVENTs", new { id = @item.EVENT.FirstOrDefault().EVENT_ID })">
                                     <img class="img-responsive  img-thumbnail" src="@item.EVENT.FirstOrDefault().PICTURE">
                                     <p style="color:#A82221;">@item.EVENT.FirstOrDefault().DETAIL</p>
                                 </a>

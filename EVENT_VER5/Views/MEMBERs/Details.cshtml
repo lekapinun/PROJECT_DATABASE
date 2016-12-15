@@ -56,7 +56,7 @@
                                             <li>Name : @Model.mem_profile.FNAME</li>
                                             <li>Surname : @Model.mem_profile.LNAME</li>
                                             <li>Birthday : @String.Format("{0:d}", @Model.mem_profile.BIRTH_DATE)</li>
-                                            <li>Gendar : @Model.mem_profile.SEX</li>
+                                            <li>Gender : @Model.mem_profile.SEX</li>
                                             <li>Phone : @Model.mem_profile.PHONE</li>
                                             <li>E-mail : @Model.mem_profile.E_MAIL</li>
                                             <li>Address : @Model.mem_profile.ADDRESS</li>
@@ -136,18 +136,30 @@
                                         <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
                                             <div class="panel panel-default arrow left">
                                                 <div class="panel-body">
+                                                    
+                                                    @if (Model.mem_profile.EVENT.Count() == 0)
+                                                    {
+                                                        <div class="comment-post">
+                                                            <a href="@Url.Action("Index","EVENTs")">
+                                                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="padding-top: 10px; padding-bottom: 5px;">
+                                                                    <p class="text-center">Let's Join Event</p>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    }
+
                                                     @foreach (var item in Model.mem_profile.EVENT.Where(a => a.TIME_START_E > DateTime.Today).OrderByDescending(t => t.TIME_START_E))
                                                     {
                                                         <div class="comment-post">
                                                             <div class="col-md-12">
-                                                                <a href="@Url.Action("Details","EVENTs", new { id = item.EVENT_ID})">
+                                                                <a href="@Url.Action("Details","EVENTs", new { id = @item.EVENT_ID})">
                                                                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="padding-top: 10px; padding-bottom: 5px;">
                                                                         <img class="img-responsive  img-thumbnail" src=@item.PICTURE>
                                                                     </div>
                                                                 </a>
 
                                                                 <div class="col-xs-12 col-sm-12 col-md-8  col-lg-8">
-                                                                    <a href="@Url.Action("Details","EVENTs", new { id = item.EVENT_ID})" style="text-decoration:none;">
+                                                                    <a href="@Url.Action("Details","EVENTs", new { id = @item.EVENT_ID})" style="text-decoration:none;">
                                                                         <h3 style="color:#A82221;">@item.EVENT_NAME</h3>
                                                                     </a>
                                                                     <p>
@@ -156,40 +168,6 @@
                                                                 </div>
 
                                                                 <div class="col-md-3 col-md-offset-9" style="margin-bottom:20px;"></div>
-                                                            </div>
-                                                        </div>
-                                                    }
-                                                    @foreach (var item in Model.mem_profile.LOCATION)
-                                                    {
-                                                        <div class="comment-post">
-                                                            <div class="col-md-12">
-                                                                <a href="@Url.Action("Details","LOCATIONs", new { id = item.ID_LOCATION})">
-                                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="padding-top: 10px; padding-bottom: 5px;">
-                                                                        <img class="img-responsive  img-thumbnail" src=@item.PICTURE>
-                                                                    </div>
-                                                                </a>
-
-                                                                <div class="col-xs-12 col-sm-12 col-md-8  col-lg-8">
-                                                                    <a href="@Url.Action("Details","LOCATIONs", new { id = item.ID_LOCATION})" style="text-decoration:none;">
-                                                                        <h3 style="color:#A82221;">@item.LOCATION_NAME</h3>
-                                                                    </a>
-                                                                    <p>
-                                                                        @item.DETAIL
-                                                                    </p>
-                                                                </div>
-
-                                                                @if (item.MEMBER.Where(a => a.MEMBER_ID.Equals(Session["username"])).FirstOrDefault() != null)
-                                                                {
-                                                                    <div class="col-md-3 col-md-offset-9" style="margin-bottom:20px;">
-                                                                        <a href="#" class="btn btn1 button-site1"><b>Promote</b></a>
-                                                                    </div>
-                                                                }
-                                                                else
-                                                                {
-                                                                    <div class="col-md-3 col-md-offset-9" style="margin-bottom:20px;">
-                                                                        @*<a href="#" class="btn btn1 button-site1"><b>Promote</b></a>*@
-                                                                    </div>
-                                                                }
                                                             </div>
                                                         </div>
                                                     }
@@ -202,7 +180,14 @@
                         </div>
                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                             <a href="#" class="col-md-12" style="color: #A82221;">
-                                <img src="imgtest/Mind.png" class="img-responsive">
+                                <img src="~/Content/img/AdSmall1.png" class="img-responsive">
+                                <h2>A Title</h2>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisici elit,sed eiusmod tempor incidunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud
+                                </p>
+                            </a>
+                            <a href="#" class="col-md-12" style="color: #A82221;">
+                                <img src="~/Content/img/AdSmall1.png" class="img-responsive">
                                 <h2>A Title</h2>
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipisici elit,sed eiusmod tempor incidunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud
