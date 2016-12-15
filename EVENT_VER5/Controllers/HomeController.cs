@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using EVENT_VER5.Models;
+using EVENT_VER5.ViewModel;
 
 namespace EVENT_VER5.Controllers
 {
@@ -50,17 +51,30 @@ namespace EVENT_VER5.Controllers
 
         public async Task<ActionResult> UsersHome(short? id)
         {
+            UserHomeViewModel mem_home = new UserHomeViewModel();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var mEMBER = await db.MEMBER.FindAsync(id);
-            ViewBag.mem = mEMBER;
+            mem_home.member = mEMBER;
+            mem_home.mem_following = mEMBER.FOLLOWING.ToList();
+            mem_home.event_for_home = new List<EVENT>();
+            foreach (var item in mem_home.mem_following)
+            {
+                foreach (var e in item.MEMBER1.EVENT)
+                {
+                    if (mem_home.event_for_home.Where(a=>a.EVENT_ID.Equals(e.EVENT_ID)).FirstOrDefault() == null)
+                    {
+                        mem_home.event_for_home.Add(e);
+                    } 
+                }
+            }
             if (mEMBER == null)
             {
                 return HttpNotFound();
             }
-            return View(await db.EVENT.ToListAsync());
+            return View(mem_home);
             //return View(mEMBER);
         }
 

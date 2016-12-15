@@ -1,0 +1,219 @@
+﻿@model IEnumerable<EVENT_VER5.Models.LOCATION>
+
+@{
+    ViewBag.Title = "Index2";
+}
+
+<title>LOCATION</title>
+@*<link rel="stylesheet" type="text/css" href="../Content/Site2.css">*@
+<body>
+    <!-- mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm -->
+
+    <div class="section">
+        <div class="container ">
+
+            <div class="row ">
+
+                <div class="col-md-12 col-lg-12 ">
+
+
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+                        </ol>
+
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+
+
+                            <div class="item active">
+                                <img src="~/Content/img/Ad1.png">
+                            </div>
+
+                            <div class="item">
+                                <img src="~/Content/img/Ad2.png">
+                            </div>
+
+                            <div class="item">
+                                <img src="~/Content/img/Ad3.png">
+
+                            </div>
+
+                            <div class="item">
+                                <img src="~/Content/img/Ad4.png">
+
+                            </div>
+
+                            <div class="item">
+                                <img src="~/Content/img/Ad5.png">
+                            </div>
+
+                        </div>
+
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm -->
+
+
+
+    <div class="section">
+        <div class="container">
+            <div class="row down">
+                <div class="col-md-2 text-center" style="color: #A82221;"> <h4> Sort by :</h4></div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-xs-2 col-md-2 ">
+                            <a href="@Url.Action("Index2","LOCATIONs",new { category = "All"})" class="col-xs-12 col-md-12 btn btn1 button-site1">All</a>
+                        </div>
+                        <div class="col-xs-2 col-md-2">
+                            <a href="@Url.Action("Index2","LOCATIONs",new { category = "Indoor"})" class="col-xs-12 col-md-12 btn btn1 button-site1 ">Indoor</a>
+                        </div>
+                        <div class="col-xs-2 col-md-2">
+                            <a href="@Url.Action("Index2","LOCATIONs",new { category = "Outdoor"})" class="col-xs-12 col-md-12 btn btn1 button-site1 ">Outdoor</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm -->
+
+
+    <div class="section">
+        <div class="container-fluid">
+            <div class="row down ">
+                <div class="col-md-12">
+                    <div class="section">
+                        <div class="container">
+                            <div class="row">
+                                @foreach (var item in Model)
+                                {
+                                    <a href="@Url.Action("Details","LOCATIONs",new { id=item.ID_LOCATION })" class="col-md-4" style="color: #A82221;">
+                                        <img src=@item.PICTURE class="img-responsive">
+                                        <h2>@item.LOCATION_NAME</h2>
+                                        <p>
+                                            @for (int i = 0; i < 30 && i < @item.DETAIL.Length; i++)
+                                            {
+                                                @item.DETAIL[i]
+                                            }
+                                            ...
+                                        </p>
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    @* }*@
+
+
+
+</body>
+
+@*<h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LOCATION_NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CATEGORY)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DETAIL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PICTURE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ADDRESS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FACILITY)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PRICE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AREA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PROMOTE_L.PROMOTE_ID)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LOCATION_NAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CATEGORY)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DETAIL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PICTURE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ADDRESS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FACILITY)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PRICE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AREA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PROMOTE_L.PROMOTE_ID)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ID_LOCATION }) |
+                @Html.ActionLink("Details", "Details", new { id=item.ID_LOCATION }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ID_LOCATION })
+            </td>
+        </tr>
+    }
+
+    </table>*@

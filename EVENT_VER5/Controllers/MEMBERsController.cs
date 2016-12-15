@@ -133,6 +133,7 @@ namespace EVENT_VER5.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             MEMBER mEMBER = await db.MEMBER.FindAsync(id);
+            Session["img"] = mEMBER.URL_IMG;
             if (mEMBER == null)
             {
                 return HttpNotFound();

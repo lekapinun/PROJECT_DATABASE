@@ -11,5 +11,6 @@ namespace EVENT_VER5.ViewModel
         public EVENT event_detail { get; set; }
         public PROMOTE_E event_promote { get; set; }
         public int day_of_promote { get; set; }
+        public List<PROMOTE_E> event_for_promote { get; set; }
     }
 }

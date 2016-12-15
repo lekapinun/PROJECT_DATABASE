@@ -1,7 +1,8 @@
-﻿@model IEnumerable<EVENT_VER5.Models.EVENT>
+﻿@model EVENT_VER5.ViewModel.UserHomeViewModel
 
 @{
     ViewBag.Title = "UsersHome";
+    int i = 0;
 }
 
 @if (Session["username"] != null)
@@ -10,245 +11,113 @@
         <div class="container" style="background-color: #fff ; border-radius: 5px; margin-bottom: 30px; ">
             <div class="section">
                 <div class="container">
-                    <div class="row">
-
+                    <div class="row" style="padding-top:20px;padding-bottom:20px;">
                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <img class="img-responsive  img-thumbnail" src="imgtest/Mind.png">
+                                    <img class="img-responsive  img-thumbnail" src=@Model.member.URL_IMG>
                                 </div>
                             </div>
-
-
-
-                            <!--  following -->
-
-                            <div class="row text-center" style="padding-top: 10px; padding-bottom: 10px;">
-
-                                <!-- <p class="glyphicon glyphicon-user"> : 10</p> -->
-                                <h4 style="color: #A82221"> Following : 10</h4>
-
+                            <div class="row text-center">
+                                <h2 style="color: #A82221;">@Model.member.USERNAME</h2>
                             </div>
+                            @if (Model.member.FOLLOWING.Count() != 0)
+                            {
+                                <div class="row text-center" style="padding-top: 10px; padding-bottom: 10px;">
+                                    <!-- <p class="glyphicon glyphicon-user"> : 10</p> -->
+                                    <h4 style="color: #A82221"> Following : @Model.member.FOLLOWING.Count()</h4>
 
-                            <div class="thumbnail">
-                                <div class="row  " style="margin-top: 10px; margin-bottom: 10px; ">
-                                    <div>
-                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: 20px">
-                                            <img class="img-responsive  " src="imgtest/Mind.png">
-
-                                        </a>
-                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: -20px">
-                                            <img class="img-responsive " src="imgtest/Mind.png">
-
-                                        </a>
-                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4   " style="margin-left: -20px">
-                                            <img class="img-responsive  " src="imgtest/Mind.png">
-
-                                        </a>
+                                </div>
+                                <div class="thumbnail">
+                                    <div class="row  " style="margin-top: 10px; margin-bottom: 10px; margin-left: 20px; ">
+                                        @foreach (var item in Model.member.FOLLOWING)
+                                        {
+                                            <div>
+                                                <a href="@Url.Action("Details","MEMBERs", new { id = item.MEMBER1.MEMBER_ID})" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: -8px">
+                                                    <img class="img-responsive" src=@item.MEMBER1.URL_IMG>
+                                                </a>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
-                                <div class="row  " style=" margin-top 10px; margin-bottom 10px; ">
-                                    <div>
-                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: 20px">
-                                            <img class="img-responsive  " src="imgtest/Mind.png">
+                            }
 
-                                        </a>
-                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: -20px">
-                                            <img class="img-responsive " src="imgtest/Mind.png">
+                            @if (Model.member.FOLLOWING1.Count() != 0)
+                            {
+                                <div class="row text-center" style="padding-top: 10px; padding-bottom: 10px;">
 
-                                        </a>
-                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4   " style="margin-left: -20px">
-                                            <img class="img-responsive  " src="imgtest/Mind.png">
+                                    <h4 style="color: #A82221"> Follower : @Model.member.FOLLOWING1.Count() </h4>
 
-                                        </a>
+                                </div>
+                                <div class="thumbnail">
+                                    <div class="row  " style="margin-top: 10px; margin-bottom: 10px; margin-left: 20px; ">
+                                        <div>
+                                            @foreach (var item in Model.member.FOLLOWING1)
+                                            {
+                                                <a href="@Url.Action("Details","MEMBERs", new { id = item.MEMBER.MEMBER_ID})" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: -8px">
+                                                    <img class="img-responsive  " src="@item.MEMBER.URL_IMG">
+
+                                                </a>
+                                            }
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row  " style=" margin-top 10px; margin-bottom 10px; ">
-                                    <div>
-                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 " style="margin-left: 20px">
-                                            <img class="img-responsive  " src="imgtest/Mind.png">
-
-                                        </a>
-                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: -20px">
-                                            <img class="img-responsive " src="imgtest/Mind.png">
-
-                                        </a>
-                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4   " style="margin-left: -20px">
-                                            <img class="img-responsive  " src="imgtest/Mind.png">
-
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!--  follower -->
-
-                            <div class="row text-center" style="padding-top: 10px; padding-bottom: 10px;">
-
-                                <h4 style="color: #A82221"> Follower : 1000 </h4>
-
-                            </div>
-
-                            <div class="thumbnail">
-                                <div class="row  " style="margin-top: 10px; margin-bottom: 10px; ">
-                                    <div>
-                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: 20px">
-                                            <img class="img-responsive  " src="imgtest/Mind.png">
-
-                                        </a>
-                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: -20px">
-                                            <img class="img-responsive " src="imgtest/Mind.png">
-
-                                        </a>
-                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4   " style="margin-left: -20px">
-                                            <img class="img-responsive  " src="imgtest/Mind.png">
-
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="row  " style=" margin-top 10px; margin-bottom 10px; ">
-                                    <div>
-                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: 20px">
-                                            <img class="img-responsive  " src="imgtest/Mind.png">
-
-                                        </a>
-                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: -20px">
-                                            <img class="img-responsive " src="imgtest/Mind.png">
-
-                                        </a>
-                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4   " style="margin-left: -20px">
-                                            <img class="img-responsive  " src="imgtest/Mind.png">
-
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="row  " style=" margin-top 10px; margin-bottom 10px; ">
-                                    <div>
-                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 " style="margin-left: 20px">
-                                            <img class="img-responsive  " src="imgtest/Mind.png">
-
-                                        </a>
-                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: -20px">
-                                            <img class="img-responsive " src="imgtest/Mind.png">
-
-                                        </a>
-                                        <a href="#" class="col-xs-4 col-sm-4 col-md-4 col-lg-4   " style="margin-left: -20px">
-                                            <img class="img-responsive  " src="imgtest/Mind.png">
-
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-
-
-
-
-
-
-
+                            }
+                         </div>
                         <!--  comment + post -->
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
                             <div class="row">
 
-
+                                @*@foreach (var item in Model.mem_following)
+                                {
+                                    <p>@item.MEMBER1.MEMBER_ID</p><br />
+                                }*@
+                                @foreach (var item in Model.event_for_home.OrderBy(t => t.TIME_START_E))
+                                {
                                 <section class="comment-list">
                                     <!-- First Comment -->
                                     <div class="row">
-
                                         <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
                                             <div class="panel panel-default arrow left">
                                                 <div class="panel-body">
+                                                            <div class="comment-post">
+                                                                <div class="col-md-12">
+                                                                    <h3 class="usershome-status-text">
+                                                                        @foreach (var m in item.MEMBER)
+                                                                        {
+                                                                            i++;
+                                                                            <a href="@Url.Action("Details","MEMBERs",new { id=m.MEMBER_ID })">
+                                                                                <img src="@m.URL_IMG" class="img-circle mini">
+                                                                            </a>
+                                                                            if ( i > 10)
+                                                                            {
+                                                                                break;
+                                                                            }
+                                                                        }
+                                                                        <a href="#" >
+                                                                            Join event
+                                                                        </a>
+                                                                    </h3>
+                                                                    <a href="@Url.Action("Details","EVENTs",new { id=item.EVENT_ID })">
+                                                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="padding-top: 10px; padding-bottom: 5px;">
+                                                                            <img class="img-responsive  img-thumbnail" src="@item.PICTURE">
+                                                                        </div>
+                                                                    </a>
+                                                                    <div class="col-xs-12 col-sm-12 col-md-8  col-lg-8">
 
-
-
-                                                    <div class="comment-post">
-
-
-                                                        <div class="col-md-12">
-                                                            <h3>
-                                                                <a href="#" style=" color #A82221; padding-left 20px; ">
-                                                                    <img src="imgtest/Mind.png" class="img-circle mini"> Username
-                                                                </a>
-                                                            </h3>
-                                                            <a href="#">
-                                                                <div class=" col-xs-12 col-sm-12 col-md-4 col-lg-4" style="padding-top: 10px; padding-bottom: 5px;">
-
-                                                                    <img class="img-responsive  img-thumbnail" src="imgtest/Mind.png">
+                                                                        <h3 style="color :#A82221;">@item.EVENT_NAME</h3>
+                                                                        <p>
+                                                                            @item.DETAIL
+                                                                        </p>
+                                                                    </div>
                                                                 </div>
-                                                            </a>
-
-
-                                                            <div class="col-xs-12 col-sm-12 col-md-8  col-lg-8">
-
-                                                                <h3 style=" color #A82221;">My Event</h3>
-                                                                <p>
-                                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                                                </p>
-
-
                                                             </div>
-                                                            <div class="col-md-3 col-md-offset-9">
-                                                                <a href="#" class="btn btn1 button-site1"><b>Promote</b></a>
-
-                                                            </div>
-
-                                                        </div>
-
-
-
-                                                    </div>
-                                                    <div class="comment-post">
-
-
-
-
-                                                        <div class="col-md-12">
-                                                            <h3>
-                                                                <a href="#" style=" color #A82221; padding-left 20px; ">
-                                                                    <img src="imgtest/Mind.png" class="img-circle mini"> Username
-                                                                </a>
-                                                            </h3>
-
-
-                                                            <a href="#">
-                                                                <div class=" col-xs-12 col-sm-12 col-md-4 col-lg-4" style="padding-top: 10px; padding-bottom: 5px;">
-
-                                                                    <img class="img-responsive  img-thumbnail" src="imgtest/Mind.png" class="img-responsive">
-
-
-
-
-                                                                </div>
-                                                            </a>
-
-                                                            <div class="col-xs-12 col-sm-12 col-md-8  col-lg-8">
-
-                                                                <h3 style=" color #A82221;">Join Event</h3>
-                                                                <p>
-                                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                                                </p>
-
-
-                                                            </div>
-
-
-                                                        </div>
-
-
-
-                                                    </div>
-
-
-
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </section>
-
+                                }
 
                             </div>
 

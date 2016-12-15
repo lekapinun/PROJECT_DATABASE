@@ -1,4 +1,16 @@
-﻿.navbar-mind {
+﻿.usershome-status-text a{
+    font-size:16px;
+    color:#EDA23E;
+    text-decoration: none;
+    padding-left:10px;
+
+}
+.usershome-status-text{
+    padding-bottom:10px;
+    border-bottom:1px solid #bdbdbd;
+    margin-top:2px;
+}
+.navbar-mind {
     min-height: 40px !important;
    
 }

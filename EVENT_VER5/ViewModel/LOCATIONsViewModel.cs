@@ -11,5 +11,6 @@ namespace EVENT_VER5.ViewModel
         public LOCATION location_detail { get; set; }
         public PROMOTE_L location_promote { get; set; }
         public int day_of_promote { get; set; }
+        public List<PROMOTE_L> location_for_promote { get; set; }
     }
 }

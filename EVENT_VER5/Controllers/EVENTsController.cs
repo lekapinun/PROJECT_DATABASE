@@ -22,6 +22,22 @@ namespace EVENT_VER5.Controllers
             var eVENT = db.EVENT.Include(e => e.PROMOTE_E);
             if (!string.IsNullOrEmpty(searchString))
             {
+                eVENT = eVENT.Where(a => a.EVENT_NAME.ToLower().Contains(searchString.ToLower()));  
+            }
+            if (!string.IsNullOrEmpty(category) && !category.Equals("All"))
+            {
+                eVENT = eVENT.Where(a => a.CATEGORY.Equals(category));
+            }
+            eVENT = eVENT.OrderBy(t => t.TIME_START_E);
+            return View(await eVENT.ToListAsync());
+        }
+
+        public async Task<ActionResult> Index2(short id, string category, string searchString)
+        {
+            var eVENT = db.EVENT.Include(e => e.PROMOTE_E);
+            eVENT = eVENT.Where(a => a.MEMBER1.FirstOrDefault().MEMBER_ID.Equals(id));
+            if (!string.IsNullOrEmpty(searchString))
+            {
                 eVENT = eVENT.Where(a => a.EVENT_NAME.ToLower().Contains(searchString.ToLower()));
             }
             if (!string.IsNullOrEmpty(category) && !category.Equals("All"))
@@ -41,6 +57,7 @@ namespace EVENT_VER5.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             eVENT.event_detail = await db.EVENT.FindAsync(id);
+            eVENT.event_for_promote = db.PROMOTE_E.Where(a => a.END_DATE > DateTime.Today).OrderBy(x => Guid.NewGuid()).Take(4).ToList(); ;
             if (eVENT == null)
             {
                 return HttpNotFound();
@@ -79,6 +96,7 @@ namespace EVENT_VER5.Controllers
                 promote_event.event_promote.END_DATE = DateTime.Today.AddDays(promote_event.day_of_promote);
                 promote_event.event_promote.BUDGETS = promote_event.day_of_promote;
                 promote_event.event_promote.MEMBER = mEMBER;
+                promote_event.event_promote.EVENT.Add(eVENT);
                 db.PROMOTE_E.Add(promote_event.event_promote);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Details", new { id = eVENT.EVENT_ID });

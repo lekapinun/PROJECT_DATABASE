@@ -31,6 +31,21 @@ namespace EVENT_VER5.Controllers
             return View(await lOCATIONs.ToListAsync());
         }
 
+        public async Task<ActionResult> Index2(short id, string category, string searchString)
+        {
+            var lOCATIONs = db.LOCATION.Include(l => l.PROMOTE_L);
+            lOCATIONs = lOCATIONs.Where(a => a.MEMBER.FirstOrDefault().MEMBER_ID.Equals(id));
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                lOCATIONs = lOCATIONs.Where(a => a.LOCATION_NAME.ToLower().Contains(searchString.ToLower()));
+            }
+            if (!string.IsNullOrEmpty(category) && !category.Equals("All"))
+            {
+                lOCATIONs = lOCATIONs.Where(a => a.CATEGORY.Equals(category));
+            }
+            return View(await lOCATIONs.ToListAsync());
+        }
+
         // GET: LOCATIONs/Details/5
         public async Task<ActionResult> Details(short? id)
         {
@@ -40,6 +55,7 @@ namespace EVENT_VER5.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             lOCATION.location_detail = await db.LOCATION.FindAsync(id);
+            lOCATION.location_for_promote = db.PROMOTE_L.Where( a=> a.END_DATE > DateTime.Today).OrderBy(x => Guid.NewGuid()).Take(4).ToList(); ;
             if (lOCATION == null)
             {
                 return HttpNotFound();
@@ -58,6 +74,7 @@ namespace EVENT_VER5.Controllers
                 promote_location.location_promote.END_DATE = DateTime.Today.AddDays(promote_location.day_of_promote);
                 promote_location.location_promote.BUDGETS = (lOCATION.PRICE * 5 * promote_location.day_of_promote)/100;
                 promote_location.location_promote.MEMBER = mEMBER;
+                promote_location.location_promote.LOCATION.Add(lOCATION);
                 db.PROMOTE_L.Add(promote_location.location_promote);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Details", new { id = lOCATION.ID_LOCATION });
