@@ -25,20 +25,23 @@
                             {
                                 <div class="row text-center" style="padding-top: 10px; padding-bottom: 10px;">
                                     <!-- <p class="glyphicon glyphicon-user"> : 10</p> -->
-                                    <a href="@Url.Action("Index","MEMBERs", new { id = Session["id"]})">
+                                    <a href="@Url.Action("Index", "MEMBERs", new { id = Session["id"] })">
                                         <h4 style="color: #A82221"> Following : @Model.member.FOLLOWING.Count()</h4>
                                     </a>
 
                                 </div>
                                 <div class="thumbnail">
                                     <div class="row  " style="margin-top: 10px; margin-bottom: 10px; margin-left: 20px; ">
+                                        @{i = 0;}
                                         @foreach (var item in Model.member.FOLLOWING)
                                         {
+                                            i++;
                                             <div>
                                                 <a href="@Url.Action("Details","MEMBERs", new { id = item.MEMBER1.MEMBER_ID})" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: -8px">
                                                     <img class="img-responsive" src=@item.MEMBER1.URL_IMG>
                                                 </a>
                                             </div>
+                                            if (i > 9) { break; }
                                         }
                                     </div>
                                 </div>
@@ -56,12 +59,15 @@
                                 <div class="thumbnail">
                                     <div class="row  " style="margin-top: 10px; margin-bottom: 10px; margin-left: 20px; ">
                                         <div>
+                                            @{i = 0;}
                                             @foreach (var item in Model.member.FOLLOWING1)
                                             {
+                                                i++;
                                                 <a href="@Url.Action("Details","MEMBERs", new { id = item.MEMBER.MEMBER_ID})" class="col-xs-4 col-sm-4 col-md-4 col-lg-4  " style="margin-left: -8px">
                                                     <img class="img-responsive  " src="@item.MEMBER.URL_IMG">
 
                                                 </a>
+                                                if (i > 9) { break; }
                                             }
                                         </div>
                                     </div>

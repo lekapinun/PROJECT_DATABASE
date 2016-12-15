@@ -55,16 +55,16 @@ namespace EVENT_VER5.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             lOCATION.location_detail = await db.LOCATION.FindAsync(id);
-            int i = 0;
-            if (db.PROMOTE_L.Count() < 4)
-            {
-                i = db.PROMOTE_L.Count();
-            }
-            else
-            {
-                i = 4;
-            }
-            lOCATION.location_for_promote = db.PROMOTE_L.Where( a=> a.END_DATE > DateTime.Today).OrderBy(x => Guid.NewGuid()).Take(i).ToList(); ;
+            //int i = 0;
+            //if (db.PROMOTE_L.Count() < 4)
+            //{
+            //    i = db.PROMOTE_L.Count();
+            //}
+            //else
+            //{
+            //    i = 4;
+            //}
+            lOCATION.location_for_promote = db.PROMOTE_L.Where( a=> a.END_DATE > DateTime.Today).OrderBy(x => Guid.NewGuid()).Take(4).ToList();
             if (lOCATION == null)
             {
                 return HttpNotFound();

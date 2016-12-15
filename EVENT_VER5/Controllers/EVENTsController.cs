@@ -71,20 +71,20 @@ namespace EVENT_VER5.Controllers
             }
             eVENT.event_detail = await db.EVENT.FindAsync(id);
             eVENT.mem = await db.MEMBER.FindAsync(id_mem);
-            int i = 0;
-            if (db.PROMOTE_E.Count() < 4)
-            {
-                i = db.PROMOTE_E.Count();
-            }
-            else
-            {
-                i = 4;
-            }
+            //int i = 0;
+            //if (db.PROMOTE_E.Count() < 4)
+            //{
+            //    i = db.PROMOTE_E.Count();
+            //}
+            //else
+            //{
+            //    i = 4;
+            //}
             DateTime today = DateTime.Today;
             DateTime b_day = Convert.ToDateTime(eVENT.mem.BIRTH_DATE.ToString());
             int age = today.Year - b_day.Year;
             if (b_day > today.AddYears(-age)) age--;
-            eVENT.event_for_promote = db.PROMOTE_E.Where(a => a.END_DATE > DateTime.Today && a.TARGET_MIN_AGE < age && a.TARGET_MAX_AGE > age ).OrderBy(x => Guid.NewGuid()).Take(i).ToList(); ;
+            eVENT.event_for_promote = db.PROMOTE_E.Where(a => a.END_DATE > DateTime.Today && a.TARGET_MIN_AGE < age && a.TARGET_MAX_AGE > age ).OrderBy(x => Guid.NewGuid()).Take(4).ToList(); ;
             if (eVENT == null)
             {
                 return HttpNotFound();
