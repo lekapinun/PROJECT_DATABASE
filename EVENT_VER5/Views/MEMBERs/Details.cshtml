@@ -136,7 +136,7 @@
                                         <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
                                             <div class="panel panel-default arrow left">
                                                 <div class="panel-body">
-                                                    @foreach (var item in Model.mem_profile.EVENT1.Where(a => a.TIME_START_E > DateTime.Today).OrderByDescending(t => t.TIME_START_E))
+                                                    @foreach (var item in Model.mem_profile.EVENT.Where(a => a.TIME_START_E > DateTime.Today).OrderByDescending(t => t.TIME_START_E))
                                                     {
                                                         <div class="comment-post">
                                                             <div class="col-md-12">

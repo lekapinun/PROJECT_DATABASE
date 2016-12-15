@@ -178,7 +178,7 @@
                             <p>Add Video</p>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-9">
-                            @Html.EditorFor(model => model.VIDEO, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.VIDEO, new { htmlAttributes = new { @class = "form-control" , @placeholder = "www.youtube.com/embed" } })
                             @Html.ValidationMessageFor(model => model.VIDEO, "", new { @class = "text-danger" })
                         </div>
                     </div>

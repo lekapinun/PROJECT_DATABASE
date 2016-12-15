@@ -16,6 +16,7 @@
             @Html.HiddenFor(model => model.TIME_START_E)
             @Html.HiddenFor(model => model.SOLD_OUT_SEAT)
             @Html.HiddenFor(model => model.LOCATION)
+            @Html.HiddenFor(model => model.PROMOTE_E)
             <div class="container" style="background-color:#fff;border-radius:5px;margin-bottom:30px;">
                 <div class="row">
                     <h1 class="create-header" style="text-decoration: none;">Create Event</h1>
@@ -140,12 +141,12 @@
                             <p>Add Video</p>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-9">
-                            @Html.EditorFor(model => model.VIDEO, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.VIDEO, new { htmlAttributes = new { @class = "form-control", @placeholder = "www.youtube.com/embed" } })
                             @Html.ValidationMessageFor(model => model.VIDEO, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="row text-center">
-                        <input type="submit" style="height: 40px; width: 100px; font-size: 20px; border-radius: 10px; background-color:#EDA23E;" value="Create">
+                        <input type="submit" style="height: 40px; width: 100px; font-size: 20px; border-radius: 10px; background-color:#EDA23E;" value="Save">
                         @*<input type="submit" value="Create" class="btn btn-default" />*@
                         @*<button type="button" style="height: 40px; width: 100px; font-size: 20px; border-radius: 10px;">Reset</button>*@
                     </div>

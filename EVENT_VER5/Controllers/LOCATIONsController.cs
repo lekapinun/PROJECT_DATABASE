@@ -55,7 +55,16 @@ namespace EVENT_VER5.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             lOCATION.location_detail = await db.LOCATION.FindAsync(id);
-            lOCATION.location_for_promote = db.PROMOTE_L.Where( a=> a.END_DATE > DateTime.Today).OrderBy(x => Guid.NewGuid()).Take(4).ToList(); ;
+            int i = 0;
+            if (db.PROMOTE_L.Count() < 4)
+            {
+                i = db.PROMOTE_L.Count();
+            }
+            else
+            {
+                i = 4;
+            }
+            lOCATION.location_for_promote = db.PROMOTE_L.Where( a=> a.END_DATE > DateTime.Today).OrderBy(x => Guid.NewGuid()).Take(i).ToList(); ;
             if (lOCATION == null)
             {
                 return HttpNotFound();
@@ -131,7 +140,7 @@ namespace EVENT_VER5.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public async Task<ActionResult> Edit([Bind(Include = "ID_LOCATION,LOCATION_NAME,CATEGORY,DETAIL,PICTURE,TIME_START_L,TIME_END_L,ADDRESS,FACILITY,PRICE,AREA,PROMOTE_L_ID")] LOCATION lOCATION)
+        public async Task<ActionResult> Edit([Bind(Include = "ID_LOCATION,LOCATION_NAME,CATEGORY,DETAIL,PICTURE,TIME_START_L,TIME_END_L,ADDRESS,FACILITY,PRICE,AREA,PROMOTE_L")] LOCATION lOCATION)
         {
             if (ModelState.IsValid)
             {

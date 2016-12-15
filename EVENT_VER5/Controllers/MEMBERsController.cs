@@ -72,15 +72,14 @@ namespace EVENT_VER5.Controllers
                 return View(mEMBER);
             }
 
-            if (mEMBER.CREDIT_CARD.Length < 13 || mEMBER.CREDIT_CARD.Length > 16)
-            {
-                Response.Write("<script> alert('CREDIT CARD incorrect.')</script>");
-                return View(mEMBER);
-            }
-
             if (mEMBER.PASSWORD != mEMBER.RE_ENTER)
             {
                 Response.Write("<script> alert('Password and Re-Enter not match.')</script>");
+                return View(mEMBER);
+            }
+            if (mEMBER.BIRTH_DATE > DateTime.Today)
+            {
+                Response.Write("<script> alert('Birthday incorrext.')</script>");
                 return View(mEMBER);
             }
 
@@ -133,7 +132,6 @@ namespace EVENT_VER5.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             MEMBER mEMBER = await db.MEMBER.FindAsync(id);
-            Session["img"] = mEMBER.URL_IMG;
             if (mEMBER == null)
             {
                 return HttpNotFound();
@@ -153,8 +151,14 @@ namespace EVENT_VER5.Controllers
                 //string[] date = mEMBER.B_DATE.Split('-');
                 //mEMBER.B_DATE = date[1] + '/' + date[0] + '/' + date[2];
                 //mEMBER.BIRTH_DATE = Convert.ToDateTime(mEMBER.B_DATE);
+                if (mEMBER.BIRTH_DATE > DateTime.Today)
+                {
+                    Response.Write("<script> alert('Birthday incorrext.')</script>");
+                    return View(mEMBER);
+                }
                 db.Entry(mEMBER).State = EntityState.Modified;
                 await db.SaveChangesAsync();
+                Session["img"] = mEMBER.URL_IMG;
                 return RedirectToAction("Details",new { id = mEMBER.MEMBER_ID});
             }
             return View(mEMBER);

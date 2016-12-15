@@ -57,7 +57,16 @@ namespace EVENT_VER5.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             eVENT.event_detail = await db.EVENT.FindAsync(id);
-            eVENT.event_for_promote = db.PROMOTE_E.Where(a => a.END_DATE > DateTime.Today).OrderBy(x => Guid.NewGuid()).Take(4).ToList(); ;
+            int i = 0;
+            if (db.PROMOTE_E.Count() < 4)
+            {
+                i = db.PROMOTE_E.Count();
+            }
+            else
+            {
+                i = 4;
+            }
+            eVENT.event_for_promote = db.PROMOTE_E.Where(a => a.END_DATE > DateTime.Today).OrderBy(x => Guid.NewGuid()).Take(i).ToList(); ;
             if (eVENT == null)
             {
                 return HttpNotFound();
@@ -161,7 +170,7 @@ namespace EVENT_VER5.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public async Task<ActionResult> Edit([Bind(Include = "EVENT_ID,EVENT_NAME,CATEGORY,DETAIL,PICTURE,VIDEO,TIME_START_E,TIME_END_E,CONDITION_MIN_AGE,CONDITION_MAX_AGE,CONDITION_SEX,SOLD_OUT_SEAT,MAX_SEAT,PRICE,PROMOTE_E_ID,LOCATION")] EVENT eVENT)
+        public async Task<ActionResult> Edit([Bind(Include = "EVENT_ID,EVENT_NAME,CATEGORY,DETAIL,PICTURE,VIDEO,TIME_START_E,TIME_END_E,CONDITION_MIN_AGE,CONDITION_MAX_AGE,CONDITION_SEX,SOLD_OUT_SEAT,MAX_SEAT,PRICE,LOCATION,PROMOTE_E")] EVENT eVENT)
         {
             if (ModelState.IsValid)
             {
